@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage';
 import AllToolsPage from './pages/AllToolsPage';
 import ToolTemplate from './pages/ToolTemplate';
 import LoginPage from './pages/LoginPage';
+import PricingPage from './pages/PricingPage';
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -20,6 +22,7 @@ function App() {
           <Route path="/all-tools" element={<AllToolsPage />} />
           <Route path="/tool/:toolId" element={<ToolTemplate />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
         </Routes>
         <Footer />
       </div>
