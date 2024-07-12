@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2024 Juju. All rights reserved.</p>
+          <p>&copy; 2024 Juju. All rights reserved Made with ❤️ for the people of the internet by <a href="http://visual.ng" style={{ textDecoration: 'underline', fontWeight: 'bold' }}>VisualHQ</a></p>
         </div>
       </div>
     </footer>

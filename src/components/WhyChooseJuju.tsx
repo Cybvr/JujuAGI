@@ -1,4 +1,3 @@
-// src/components/WhyChooseJuju.tsx
 import React from 'react';
 import { Zap, Shield, Clock, Globe, Sparkles, RefreshCw } from 'lucide-react';
 

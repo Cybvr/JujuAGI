@@ -4,6 +4,7 @@ import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import ToolsSection from '../components/ToolsSection';
 import WhyChooseJuju from '../components/WhyChooseJuju';
 import CallToAction from '../components/CallToAction';
+import InstallGuide from '../components/InstallGuide';
 
 interface FAQ {
   question: string;
@@ -100,6 +101,9 @@ const HomePage: React.FC = () => {
       {/* Why Choose Juju Section */}
       <WhyChooseJuju />
 
+      {/* Your existing sections */}
+      <InstallGuide />
+      
       {/* Pricing Section */}
       <section id="pricing" className="bg-gray-50 py-20">
         <div className="container mx-auto px-4">
