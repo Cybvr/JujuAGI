@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import ToolsSection from '../components/ToolsSection';
 import WhyChooseJuju from '../components/WhyChooseJuju';
 import CallToAction from '../components/CallToAction';
@@ -64,15 +64,35 @@ const HomePage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
+
       <section className="bg-gray-50 text-black py-36">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-6xl font-bold mb-4">Meet your sidekick</h1>
           <p className="text-xl mb-8">The Ultimate Hub of Tools, Add-ons & Assets for Every Creator</p>
-          <div className="space-x-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-blue-700 bg-white transition duration-300">Get Started</button>
+          <div className="mb-8 relative">
+            <div className="flex items-center justify-center">
+              <input 
+                type="search" 
+                placeholder="Search tools" 
+                className="px-4 py-2 rounded-l-md border border-gray-300 w-full md:w-1/2 lg:w-1/3"
+              />
+              <button 
+                className="bg-blue-600 text-white px-3 py-2 rounded-r-md hover:bg-blue-700 transition duration-300"
+                aria-label="Search"
+              >
+                <Search size={20} />
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center justify-center space-x-4 -mt-4 mb-4">
+            <h2 className="text-sm font-semibold">Recent Tools:</h2>
+            <div className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-4 py-1 rounded-full">PDF to JPG</div>
+            <div className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-4 py-1 rounded-full">Video to Audio</div>
+            <div className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-4 py-1 rounded-full">Text to Speech</div>
           </div>
         </div>
       </section>
+
 
       {/* Tools Section */}
       <ToolsSection />
