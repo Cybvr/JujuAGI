@@ -5,9 +5,9 @@ self.addEventListener('install', (event) => {
         '/',
         '/index.html',
         '/style.css',
-        '/script.js',
-        '/icon-192x192.png',
-        '/icon-512x512.png'
+        '/index.tsx',
+        '/src/assets/images/app/juju-192x192.png',
+        '/src/assets/images/app/juju-512x512.png'
       ]);
     })
   );

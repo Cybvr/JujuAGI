@@ -1,13 +1,13 @@
 {
   "name": "Juju",
-  "short_name": "App",
+  "short_name": "Juju",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#154ffe",
   "icons": [
     {
-      "src": "/icon-192x192.png",
+      "src": "/src/assets/app/juju-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
