@@ -1,17 +1,19 @@
 {
-  "name": "Juju",
+  "name": "Juju Tools",
   "short_name": "Juju",
+  "description": "All-in-one tool for file conversions and manipulations",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#154ffe",
+  "background_color": "#ffffff",
+  "theme_color": "#164fff",
   "icons": [
     {
-      "src": "/src/assets/images/app/juju-192x192.png",
+      "src": "icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/src/assets/images/app/juju-512x512.png",
+      "src": "icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

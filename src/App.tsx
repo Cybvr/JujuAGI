@@ -14,6 +14,10 @@ import FAQPage from './pages/FAQPage';
 import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/SignupPage';
 import CategoryPage from './pages/CategoryPage';
+import InstallPrompt from './components/InstallPrompt';
+import Dashboard from './pages/Dashboard';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -22,24 +26,32 @@ function App() {
   const isSignupPage = location.pathname === '/signup';
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      {!isLoginPage && !isSignupPage && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/all-tools" element={<AllToolsPage />} />
-        <Route path="/tool/:toolId" element={<ToolTemplate />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/legal" element={<LegalPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/category/:category" element={<CategoryPage />} />
-      </Routes>
-      {!isLoginPage && !isSignupPage && <Footer />}
-    </div>
+    <AuthProvider>
+      <div className={darkMode ? 'dark' : ''}>
+        {!isLoginPage && !isSignupPage && <Header darkMode={darkMode} setDarkMode={setDarkMode} />}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/all-tools" element={<AllToolsPage />} />
+          <Route path="/tool/:toolId" element={<ToolTemplate />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/legal" element={<LegalPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/dashboard" element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          } />
+        </Routes>
+        {!isLoginPage && !isSignupPage && <Footer />}
+        <InstallPrompt />
+      </div>
+    </AuthProvider>
   );
 }
 
