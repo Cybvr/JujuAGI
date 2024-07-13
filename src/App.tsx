@@ -13,6 +13,7 @@ import TermsAndConditionsPage from './pages/TermsAndConditionsPage';
 import FAQPage from './pages/FAQPage';
 import SettingsPage from './pages/SettingsPage';
 import SignupPage from './pages/SignupPage';
+import CategoryPage from './pages/CategoryPage';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
       </Routes>
       {!isLoginPage && !isSignupPage && <Footer />}
     </div>
