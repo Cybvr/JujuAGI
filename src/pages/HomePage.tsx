@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import ToolsSection from '../components/ToolsSection';
 import WhyChooseJuju from '../components/WhyChooseJuju';
 import CallToAction from '../components/CallToAction';
 import InstallGuide from '../components/InstallGuide';
+import PricingPlans from '../components/PricingPlans';
 
 interface FAQ {
   question: string;
@@ -108,27 +108,9 @@ const HomePage: React.FC = () => {
       <section id="pricing" className="bg-gray-50 py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-6xl font-bold text-center mb-12 text-gray-800">Pricing</h2>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <div className="bg-white p-8 rounded-md shadow-sm border border-gray-200 w-full md:w-1/3">
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Free</h3>
-              <ul className="mb-6 space-y-2 text-gray-600">
-                <li>✅ Access to all tools</li>
-                <li>✅ Ad-supported</li>
-                <li>❌ Captchas required</li>
-              </ul>
-              <button className="w-full bg-[#164fff] text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Get Started</button>
-            </div>
-            <div className="bg-[#164fff] text-white p-8 rounded-md shadow-md w-full md:w-1/3">
-              <h3 className="text-2xl font-bold mb-4">Premium</h3>
-              <ul className="mb-6 space-y-2">
-                <li>✅ Access to all tools</li>
-                <li>✅ Ad-free experience</li>
-                <li>✅ No captchas</li>
-              </ul>
-              <button className="w-full bg-white text-[#164fff] py-2 rounded-md hover:bg-gray-100 transition duration-300">Upgrade Now</button>
-            </div>
-          </div>
+          <PricingPlans />
         </div>
+      
       </section>
       {/* FAQ Section */}
       <FAQSection />

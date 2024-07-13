@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Smartphone, Monitor, Plus } from 'lucide-react';
 
 const InstallGuide = () => {

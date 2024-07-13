@@ -5,7 +5,9 @@ const LoginPage: React.FC = () => {
     <div className="flex items-center justify-center h-full bg-gray-100 pt-20 pb-20">
       <div className="w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-center mb-6 pb-6">
-          <img src="/src/logoblack.png" alt="Logo" className="h-12 w-auto" />
+          <a href="http://jujuagi.com">
+            <img src="/src/logoblack.png" alt="Logo" className="h-12 w-auto" />
+          </a>
         </div>
         <h1 className="text-2xl font-bold text-center mb-2 pb-8">Welcome Back!</h1>
         <button className="w-full px-4 py-2 mb-4 text-white bg-blue-600 rounded-md hover:bg-blue-700">
