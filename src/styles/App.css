@@ -26,6 +26,7 @@
 
   /* Set core body defaults */
   body {
+    font-family: 'Epilogue', sans-serif;
     min-height: 100vh;
     line-height: 1.5;
     margin: 0;

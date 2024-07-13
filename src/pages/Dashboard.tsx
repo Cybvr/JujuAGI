@@ -1,11 +1,24 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Wrench, Clock, Star, BarChart } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Home, User, Wrench, Clock, Settings, CreditCard, HelpCircle, MessageSquare, LogOut, Menu, ChevronDown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+
+// Import your menu components
+import DashboardContent from '../components/settings/DashboardContent';
+import Profile from '../components/settings/Profile';
+import MyTools from '../components/settings/MyTools';
+import RecentConversions from '../components/settings/RecentConversions';
+import SettingsComponent from '../components/settings/SettingsComponent';
+import Subscription from '../components/settings/Subscription';
+import HelpSupport from '../components/settings/HelpSupport';
+import SendFeedback from '../components/settings/SendFeedback';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { currentUser, logOut } = useAuth();
+  const [activeMenu, setActiveMenu] = useState('Dashboard');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
     try {
@@ -16,65 +29,112 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const menuItems = [
+    { name: 'Dashboard', icon: Home, component: DashboardContent },
+    { name: 'Profile', icon: User, component: Profile },
+    { name: 'My Tools', icon: Wrench, component: MyTools },
+    { name: 'Recent Conversions', icon: Clock, component: RecentConversions },
+    { name: 'Settings', icon: Settings, component: SettingsComponent },
+    { name: 'Subscription', icon: CreditCard, component: Subscription },
+    { name: 'Help and Support', icon: HelpCircle, component: HelpSupport },
+    { name: 'Send Feedback', icon: MessageSquare, component: SendFeedback },
+  ];
+
+  const ActiveComponent = menuItems.find(item => item.name === activeMenu)?.component || DashboardContent;
+
+  const handleMenuItemClick = (name: string) => {
+    setActiveMenu(name);
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Welcome, {currentUser?.email || 'User'}!</h1>
-        <button 
-          onClick={handleLogout}
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Log out
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <DashboardCard title="Total Conversions" value="42" icon={<BarChart />} />
-        <DashboardCard title="Favorite Tools" value="3" icon={<Star />} />
-        <DashboardCard title="Recent Tools" value="5" icon={<Clock />} />
-        <DashboardCard title="Available Tools" value="20" icon={<Wrench />} />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <DashboardSection title="Recent Tools">
-          <ul>
-            <li><Link to="/tool/pdf-to-word">PDF to Word</Link></li>
-            <li><Link to="/tool/image-resize">Image Resize</Link></li>
-            <li><Link to="/tool/video-compress">Video Compress</Link></li>
-          </ul>
-        </DashboardSection>
-        <DashboardSection title="Favorite Tools">
-          <ul>
-            <li><Link to="/tool/pdf-merge">PDF Merge</Link></li>
-            <li><Link to="/tool/image-to-text">Image to Text</Link></li>
-            <li><Link to="/tool/audio-trim">Audio Trim</Link></li>
-          </ul>
-        </DashboardSection>
-        <DashboardSection title="Quick Links">
-          <ul>
-            <li><Link to="/all-tools">All Tools</Link></li>
-            <li><Link to="/settings">Settings</Link></li>
-            <li><Link to="/upgrade">Upgrade to Premium</Link></li>
-          </ul>
-        </DashboardSection>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      {/* Header with dropdown for mobile only */}
+      <header className="md:hidden bg-white dark:bg-gray-800 shadow-md p-4 sticky top-0 z-10">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">Dashboard</h1>
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 focus:outline-none"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <Menu size={24} />
+              <ChevronDown size={20} className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-20">
+                {menuItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => handleMenuItemClick(item.name)}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <item.icon className="inline-block w-4 h-4 mr-2" />
+                    {item.name}
+                  </button>
+                ))}
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  <LogOut className="inline-block w-4 h-4 mr-2" />
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <div className="flex">
+        {/* Sidebar for desktop */}
+        <aside className="hidden md:block w-64 bg-white dark:bg-gray-800 h-screen sticky top-0 p-4">
+          <nav>
+            {menuItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleMenuItemClick(item.name)}
+                className={`flex items-center w-full px-4 py-2 mt-2 text-left ${
+                  activeMenu === item.name
+                    ? 'bg-gray-200 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                }`}
+              >
+                <item.icon className="w-5 h-5 mr-3" />
+                {item.name}
+              </button>
+            ))}
+            <button
+              onClick={handleLogout}
+              className="flex items-center w-full px-4 py-2 mt-2 text-left text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <LogOut className="w-5 h-5 mr-3" />
+              Log out
+            </button>
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-4 md:p-8">
+          <h2 className="text-3xl font-bold mb-8">Welcome, {currentUser?.email || 'User'}!</h2>
+          <ActiveComponent />
+        </main>
       </div>
     </div>
   );
 };
-
-const DashboardCard: React.FC<{ title: string; value: string; icon: React.ReactNode }> = ({ title, value, icon }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md">
-    <div className="flex items-center justify-between mb-4">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <span className="text-blue-500">{icon}</span>
-    </div>
-    <p className="text-3xl font-bold">{value}</p>
-  </div>
-);
-
-const DashboardSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md">
-    <h3 className="text-xl font-semibold mb-4">{title}</h3>
-    {children}
-  </div>
-);
 
 export default Dashboard;

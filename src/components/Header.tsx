@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import logo from '../logoblack.png';
 import { useAuth } from '../contexts/AuthContext';
@@ -13,14 +13,15 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const menuItems = [
     { name: 'Home', path: '/' },
-    { name: 'Image', path: '/tool/image' },
-    { name: 'Document', path: '/tool/document' },
-    { name: 'Text', path: '/tool/text' },
-    { name: 'Audio', path: '/tool/audio' },
-    { name: 'Swap', path: '/tool/swap' },
+    { name: 'Image', path: 'image' },
+    { name: 'Document', path: 'document' },
+    { name: 'Text', path: 'text' },
+    { name: 'Audio', path: 'audio' },
+    { name: 'Swap', path: 'swap' },
   ];
 
   useEffect(() => {
@@ -36,6 +37,15 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
     localStorage.setItem('darkMode', (!darkMode).toString());
   };
 
+  const handleNavigation = (path: string) => {
+    if (path === '/') {
+      navigate(path);
+    } else {
+      navigate(`/category/${path}`);
+    }
+    setMenuOpen(false);
+  };
+
   return (
     <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 border-b border-gray-300 dark:border-gray-700">
       <nav className="container mx-auto px-4 py-3">
@@ -45,13 +55,13 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
           </Link>
           <div className="hidden md:flex space-x-4 items-center">
             {menuItems.map((item) => (
-              <Link
+              <button
                 key={item.path}
-                to={item.path}
+                onClick={() => handleNavigation(item.path)}
                 className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {item.name}
-              </Link>
+              </button>
             ))}
           </div>
           <div className="flex items-center space-x-4">
@@ -88,14 +98,13 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
         {menuOpen && (
           <div className="md:hidden mt-4">
             {menuItems.map((item) => (
-              <Link
+              <button
                 key={item.path}
-                to={item.path}
-                className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => handleNavigation(item.path)}
+                className="block w-full text-left py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {item.name}
-              </Link>
+              </button>
             ))}
             <Link
               to="/pricing"
