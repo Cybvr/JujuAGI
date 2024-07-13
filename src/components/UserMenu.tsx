@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { User, Settings, Tool, Clock, CreditCard, HelpCircle, MessageSquare, LogOut } from 'lucide-react';
+import { User, Settings, Wrench, Clock, CreditCard, HelpCircle, MessageSquare, LogOut } from 'lucide-react';
 
 const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +54,7 @@ const UserMenu: React.FC = () => {
             <User className="mr-2" size={16} /> Dashboard
           </Link>
           <Link to="/my-tools" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
-            <Tool className="mr-2" size={16} /> My Tools
+            <Wrench className="mr-2" size={16} /> My Tools
           </Link>
           <Link to="/recent" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
             <Clock className="mr-2" size={16} /> Recent Conversions

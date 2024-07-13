@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import logo from '../logoblack.png';
@@ -23,8 +23,21 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
     { name: 'Swap', path: '/tool/swap' },
   ];
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', (!darkMode).toString());
+  };
+
   return (
-    <header className="bg-white dark:bg-white shadow-sm sticky top-0 z-10 border-b border-gray-300">
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 border-b border-gray-300 dark:border-gray-700">
       <nav className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
@@ -35,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-gray-600 dark:text-gray-900 hover:text-blue-600 dark:hover:text-blue-400"
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {item.name}
               </Link>
@@ -43,14 +56,14 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
           </div>
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setDarkMode(!darkMode)}
+              onClick={toggleDarkMode}
               className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Link
               to="/pricing"
-              className="hidden md:block bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-100 border border-gray-300 dark:hover:text-gray-900"
+              className="hidden md:block bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600"
             >
               Premium
             </Link>
