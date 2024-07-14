@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Image, ArrowRightLeft, Scissors } from 'lucide-react';
+import { FileText, Image, ArrowRightLeft, Scissors, Repeat, FileDown, Minimize, Layers } from 'lucide-react';
 
 interface Tool {
   icon: React.ReactNode;
@@ -42,7 +42,35 @@ const ToolsSection: React.FC = () => {
       path: "/tool/split-pdf",
       category: "PDF"
     },
-    // Add more tools for other categories here
+    // Image tools
+    {
+      icon: <Layers size={32} />,
+      title: "Remove Background",
+      description: "Remove background from images easily.",
+      path: "/tool/remove-background",
+      category: "Image"
+    },
+    {
+      icon: <Minimize size={32} />,
+      title: "Image Resizer",
+      description: "Resize images to your desired dimensions.",
+      path: "/tool/image-resizer",
+      category: "Image"
+    },
+    {
+      icon: <Repeat size={32} />,
+      title: "Image Converter",
+      description: "Convert images between different formats.",
+      path: "/tool/image-converter",
+      category: "Image"
+    },
+    {
+      icon: <FileDown size={32} />,
+      title: "Image Compressor",
+      description: "Compress images to reduce file size.",
+      path: "/tool/image-compressor",
+      category: "Image"
+    },
   ];
 
   const categories = ['All', 'PDF', 'Image', 'Text', 'Audio', 'Convert'];
@@ -55,16 +83,14 @@ const ToolsSection: React.FC = () => {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12">Our Tools</h2>
-
-        {/* Category filter */}
-        <div className="flex justify-center mb-8">
+        <div className="flex flex-wrap justify-center mb-8">
           {categories.map(category => (
             <button
               key={category}
-              className={`mx-2 px-4 py-2 rounded-md ${
+              className={`mx-2 px-4 py-2 rounded-md mb-2 ${
                 activeCategory === category
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-700'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
               onClick={() => setActiveCategory(category)}
             >
@@ -72,8 +98,6 @@ const ToolsSection: React.FC = () => {
             </button>
           ))}
         </div>
-
-        {/* Tools grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredTools.map((tool, index) => (
             <Link key={index} to={tool.path} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">

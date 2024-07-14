@@ -2,9 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import ToolPage from '../common/ToolPage';
 
-const SplitPDFTool: React.FC = () => {
+const RemoveBackgroundTool: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [splitPages, setSplitPages] = useState<string>('');
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFile(acceptedFiles[0]);
@@ -13,7 +12,7 @@ const SplitPDFTool: React.FC = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: { 'application/pdf': ['.pdf'] },
+    accept: { 'image/*': [] },
     multiple: false
   });
 
@@ -25,45 +24,40 @@ const SplitPDFTool: React.FC = () => {
       >
         <input {...getInputProps()} />
         <button className="bg-white text-blue-500 px-4 py-2 rounded">
-          Choose PDF file
+          Choose Image
         </button>
-        <p className="mt-2">or drop PDF file here</p>
+        <p className="mt-2">or drop image here</p>
       </div>
       {file && (
         <div className="bg-gray-100 p-4 rounded-lg">
           <p className="font-semibold">Selected file: {file.name}</p>
-          <input 
-            type="text" 
-            placeholder="Enter pages to split (e.g., 1-3, 5, 7-9)" 
-            value={splitPages}
-            onChange={(e) => setSplitPages(e.target.value)}
-            className="mt-2 w-full p-2 border rounded"
-          />
+          <button className="mt-2 bg-green-500 text-white px-4 py-2 rounded">
+            Remove Background
+          </button>
         </div>
       )}
     </div>
   );
 };
 
-const SplitPDFInstructions: React.FC = () => (
+const RemoveBackgroundInstructions: React.FC = () => (
   <>
     <h3 className="text-xl font-semibold mb-4">Steps:</h3>
     <ol className="list-decimal list-inside space-y-2">
-      <li>Select the PDF file you want to split.</li>
-      <li>Enter the page ranges you want to extract (e.g., 1-3, 5, 7-9).</li>
-      <li>Click "Split PDF" to create new PDF files from the selected pages.</li>
-      <li>Download your split PDF files.</li>
+      <li>Upload an image file (PNG, JPG, etc.).</li>
+      <li>Our AI will automatically detect and remove the background.</li>
+      <li>Download your image with a transparent background.</li>
     </ol>
   </>
 );
 
-const SplitPDF: React.FC = () => (
+const RemoveBackground: React.FC = () => (
   <ToolPage
-    title="Split PDF File"
-    toolComponent={<SplitPDFTool />}
-    instructions={<SplitPDFInstructions />}
-    category="pdf"
+    title="Remove Image Background"
+    toolComponent={<RemoveBackgroundTool />}
+    instructions={<RemoveBackgroundInstructions />}
+    category="image"
   />
 );
 
-export default SplitPDF;
+export default RemoveBackground;

@@ -1,6 +1,7 @@
 import React from 'react';
 import OtherToolsSection from './OtherToolsSection';
 
+
 interface ToolPageProps {
   title: string;
   toolComponent: React.ReactNode;
