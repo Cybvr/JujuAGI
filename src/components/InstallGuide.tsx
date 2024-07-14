@@ -3,11 +3,11 @@ import { Smartphone, Monitor, Plus } from 'lucide-react';
 
 const InstallGuide = () => {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-gray-100 dark:bg-gray-800 py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Install Juju on Your Device</h2>
+        <h2 className="text-4xl font-bold text-center mb-12">Download Juju</h2>
         <div className="grid md:grid-cols-2 gap-12">
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="bg-white dark:bg-gray-900 p-8 rounded-lg">
             <div className="flex items-center mb-4">
               <Smartphone className="text-blue-600 mr-3" size={24} />
               <h3 className="text-2xl font-semibold">On Your Phone</h3>
@@ -19,7 +19,7 @@ const InstallGuide = () => {
               <li>Follow the prompts to install</li>
             </ol>
           </div>
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="bg-white dark:bg-gray-900 p-8 rounded-lg">
             <div className="flex items-center mb-4">
               <Monitor className="text-blue-600 mr-3" size={24} />
               <h3 className="text-2xl font-semibold">On Chrome Desktop</h3>

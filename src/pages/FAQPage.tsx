@@ -1,6 +1,6 @@
 const FAQPage = () => {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white dark:bg-gray-800 min-h-screen">
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">Frequently Asked Questions</h1>
         <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">

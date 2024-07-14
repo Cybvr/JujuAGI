@@ -1,33 +1,77 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Check, X } from 'lucide-react';
 
 const PricingPlans: React.FC = () => {
+  const plans = [
+    {
+      name: 'Free',
+      price: '$0',
+      features: [
+        { name: 'Access to basic tools', included: true },
+        { name: 'Limited file size (up to 10MB)', included: true },
+        { name: '5 conversions per day', included: true },
+        { name: 'Ad-supported experience', included: true },
+        { name: 'Standard support', included: true },
+        { name: 'Access to premium tools', included: false },
+        { name: 'Ad-free experience', included: false },
+        { name: 'Unlimited conversions', included: false },
+        { name: 'Priority support', included: false },
+      ],
+      ctaText: 'Get Started',
+      ctaLink: '/signup',
+    },
+    {
+      name: 'Lifetime Access',
+      price: '$20',
+      features: [
+        { name: 'Access to all tools (basic & premium)', included: true },
+        { name: 'Increased file size limit (up to 50MB)', included: true },
+        { name: 'Unlimited conversions', included: true },
+        { name: 'Ad-free experience', included: true },
+        { name: 'Priority support', included: true },
+        { name: 'Early access to new features', included: true },
+      ],
+      ctaText: 'Upgrade Now',
+      ctaLink: '/signup',
+    },
+  ];
+
   return (
     <div className="flex flex-col md:flex-row justify-center items-stretch gap-8">
-      <div className="bg-gray-50 p-8 rounded-lg shadow-md w-full md:w-1/3 flex flex-col">
-        <h2 className="text-2xl font-bold mb-2">Free</h2>
-        <p className="text-5xl font-bold text-blue-600 mb-4">$0</p>
-        <ul className="mb-6 space-y-2 text-gray-600 flex-grow">
-          <li>✅ Access to basic tools</li>
-          <li>✅ Ad-supported</li>
-          <li>❌ Premium features</li>
-        </ul>
-        <Link to="/signup" className="bg-blue-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-blue-700 transition duration-300 text-center">
-          Get Started
-        </Link>
-      </div>
-      <div className="bg-blue-600 text-white p-8 rounded-lg shadow-md w-full md:w-1/3 flex flex-col">
-        <h2 className="text-2xl font-bold mb-2">Lifetime Access</h2>
-        <p className="text-5xl font-bold mb-4">$20</p>
-        <ul className="mb-6 space-y-2 flex-grow">
-          <li>✅ Access to all tools</li>
-          <li>✅ Ad-free experience</li>
-          <li>✅ Premium support</li>
-        </ul>
-        <Link to="/signup" className="bg-white text-blue-600 px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition duration-300 text-center">
-          Upgrade Now
-        </Link>
-      </div>
+      {plans.map((plan) => (
+        <div
+          key={plan.name}
+          className={`bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full md:w-1/2 flex flex-col ${
+            plan.name === 'Lifetime Access' ? 'border-2 border-blue-500' : ''
+          }`}
+        >
+          <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
+          <p className="text-4xl font-bold text-blue-600 mb-4">{plan.price}</p>
+          <ul className="mb-6 space-y-2 text-gray-600 dark:text-gray-300 flex-grow">
+            {plan.features.map((feature, index) => (
+              <li key={index} className="flex items-center">
+                {feature.included ? (
+                  <Check className="text-green-500 mr-2" size={20} />
+                ) : (
+                  <X className="text-red-500 mr-2" size={20} />
+                )}
+                {feature.name}
+              </li>
+            ))}
+          </ul>
+          <Link
+            to={plan.ctaLink}
+            className={`${
+              plan.name === 'Lifetime Access'
+                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+            } px-6 py-2 rounded-md font-semibold transition duration-300 text-center`}
+          >
+            {plan.ctaText}
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };

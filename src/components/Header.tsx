@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 import logo from '../logoblack.png';
+import mobilelogo from '../assets/images/app/juju-192x192.png';
 import { useAuth } from '../contexts/AuthContext';
 import UserMenu from './UserMenu';
 
@@ -16,12 +17,11 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Image', path: 'image' },
-    { name: 'Document', path: 'document' },
-    { name: 'Text', path: 'text' },
-    { name: 'Audio', path: 'audio' },
-    { name: 'Swap', path: 'swap' },
+    { name: 'Image', path: '/all-tools?category=image' },
+    { name: 'PDF', path: '/all-tools?category=pdf' },
+    { name: 'Text', path: '/all-tools?category=text' },
+    { name: 'Audio', path: '/all-tools?category=audio' },
+    { name: 'Convert', path: '/all-tools?category=convert' },
   ];
 
   useEffect(() => {
@@ -51,7 +51,16 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
       <nav className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Juju Logo" className="w-32 h-10" />
+            <img 
+              src={logo} 
+              alt="Juju Logo" 
+              className="w-32 h-10 hidden md:block" 
+            />
+            <img 
+              src={mobilelogo} 
+              alt="Juju Logo" 
+              className="w-10 h-10 md:hidden" 
+            />
           </Link>
           <div className="hidden md:flex space-x-4 items-center">
             {menuItems.map((item) => (

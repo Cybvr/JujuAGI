@@ -5,16 +5,14 @@ import logo from '../logoblack.png';  // Adjust the path as necessary
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white text-black py-16">
+    <footer className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap text-left">
           <div className="w-full md:w-1/4 mb-6 md:mb-0 pr-6">
             <img src={logo} alt='Logo' className="mb-2 mx-0 w-1/2 h-auto" />
             <p className="text-sm text-left">
-              Juju is a marketing sidekick platform that empowers entrepreneurs, creators, and small businesses with tools for growth.
-            </p>
+              A collection of various tools to help you with various tasks.       </p>
           </div>
-
           <div className="w-full md:w-3/4 flex flex-wrap -mx-2">
             <div className="w-full md:w-1/4 mb-4 px-2">
               <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
@@ -22,12 +20,15 @@ const Footer: React.FC = () => {
                 <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
                 <li><Link to="/all-tools" className="hover:text-blue-400">All Tools</Link></li>
                 <li><Link to="/pricing" className="hover:text-blue-400">Pricing</Link></li>
+                <li><Link to="/faq" className="hover:text-blue-400">FAQs</Link></li>
               </ul>
             </div>
             <div className="w-full md:w-1/4 mb-4 px-2">
               <h4 className="text-lg font-semibold mb-2">Tools</h4>
               <ul>
                 <li><Link to="/tool/text-to-image" className="hover:text-blue-400">Text to Image</Link></li>
+                <li><Link to="/tool/remove-background" className="hover:text-blue-400">Remove BG</Link></li>
+                <li><Link to="/tool/word-to-pdf" className="hover:text-blue-400">Word to PDF</Link></li>
                 {/* Add more tools here */}
               </ul>
             </div>
@@ -59,7 +60,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2024 Juju. All rights reserved. Made with ❤️ for the people of the internet by <a href="http://visual.ng" style={{ textDecoration: 'underline', fontWeight: 'bold' }}>VisualHQ</a></p>
+          <p>&copy; 2024 Juju. All rights reserved. Made with ❤️ for the people of the internet by <a href="http://visual.ng" className="underline font-bold">VisualHQ</a></p>
         </div>
       </div>
     </footer>

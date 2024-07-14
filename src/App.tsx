@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+// @ts-ignore
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AllToolsPage from './pages/AllToolsPage';
+import PDFtoJPG from './components/tools/pdf/PDFtoJPG';
+import JPGtoPDF from './components/tools/pdf/JPGtoPDF';
+import MergePDF from './components/tools/pdf/MergePDF';
+import SplitPDF from './components/tools/pdf/SplitPDF';
 import ToolTemplate from './pages/ToolTemplate';
 import LoginPage from './pages/LoginPage';
 import PricingPage from './pages/PricingPage';
@@ -24,9 +29,11 @@ function App() {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
   });
+
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
+  const isDashboardPage = location.pathname === '/dashboard';
 
   useEffect(() => {
     if (darkMode) {
@@ -43,14 +50,19 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className={darkMode ? 'dark' : ''}>
-        {!isLoginPage && !isSignupPage && (
+      <div className={`min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white ${darkMode ? 'dark' : ''}`}>
+        {!isLoginPage && !isSignupPage && !isDashboardPage && (
           <Header darkMode={darkMode} setDarkMode={toggleDarkMode} />
         )}
-        <main className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+        <main className={`${isDashboardPage ? 'dashboard-main' : ''}`}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/all-tools" element={<AllToolsPage />} />
+            <Route path="/tool/pdf-to-jpg" element={<PDFtoJPG />} />
+            <Route path="/tool/jpg-to-pdf" element={<JPGtoPDF />} />
+            <Route path="/tool/merge-pdf" element={<MergePDF />} />
+            <Route path="/tool/split-pdf" element={<SplitPDF />} />
+            <Route path="*" element={<AllToolsPage />} />
             <Route path="/tool/:toolId" element={<ToolTemplate />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/pricing" element={<PricingPage />} />
@@ -73,7 +85,7 @@ function App() {
             />
           </Routes>
         </main>
-        {!isLoginPage && !isSignupPage && <Footer />}
+        {!isLoginPage && !isSignupPage && !isDashboardPage && <Footer />}
         <InstallPrompt />
       </div>
     </AuthProvider>
