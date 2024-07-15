@@ -13,6 +13,12 @@ const PDFtoJPG = lazy(() => import('./components/tools/pdf/PDFtoJPG'));
 const JPGtoPDF = lazy(() => import('./components/tools/pdf/JPGtoPDF'));
 const MergePDF = lazy(() => import('./components/tools/pdf/MergePDF'));
 const SplitPDF = lazy(() => import('./components/tools/pdf/SplitPDF'));
+// Convert tools
+const ExcelToPDF = lazy(() => import('./components/tools/convert/ExcelToPDF'));
+const CSVToExcel = lazy(() => import('./components/tools/convert/CSVToExcel'));
+const XMLToJSON = lazy(() => import('./components/tools/convert/XMLToJSON'));
+const XMLToCSV = lazy(() => import('./components/tools/convert/XMLToCSV'));
+
 const RemoveBackground = lazy(() => import('./components/tools/images/RemoveBackground'));
 const ImageResizer = lazy(() => import('./components/tools/images/ImageResizer'));
 const ImageConverter = lazy(() => import('./components/tools/images/ImageConverter'));
@@ -28,6 +34,10 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+const ResumeWriter = lazy(() => import('./components/tools/writing/ResumeWriter'));
+const EssayWriter = lazy(() => import('./components/tools/writing/EssayWriter'));
+const GrammarChecker = lazy(() => import('./components/tools/writing/GrammarChecker'));
+const PlagiarismDetector = lazy(() => import('./components/tools/writing/PlagiarismDetector'));
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -72,6 +82,14 @@ function App() {
               <Route path="/tool/image-resizer" element={<ImageResizer />} />
               <Route path="/tool/image-converter" element={<ImageConverter />} />
               <Route path="/tool/image-compressor" element={<ImageCompressor />} />
+              <Route path="/tool/resume-writer" element={<ResumeWriter />} />
+              <Route path="/tool/essay-writer" element={<EssayWriter />} />
+              <Route path="/tool/grammar-checker" element={<GrammarChecker />} />
+              <Route path="/tool/plagiarism-detector" element={<PlagiarismDetector />} />
+              <Route path="/tool/excel-to-pdf" element={<ExcelToPDF />} />
+              <Route path="/tool/csv-to-excel" element={<CSVToExcel />} />
+              <Route path="/tool/xml-to-json" element={<XMLToJSON />} />
+              <Route path="/tool/xml-to-csv" element={<XMLToCSV />} />
               <Route path="*" element={<AllToolsPage />} />
               <Route path="/tool/:toolId" element={<ToolTemplate />} />
               <Route path="/login" element={<LoginPage />} />

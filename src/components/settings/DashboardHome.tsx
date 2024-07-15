@@ -1,4 +1,3 @@
-// src/components/settings/DashboardContent.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Wrench, Clock, Star, BarChart } from 'lucide-react';

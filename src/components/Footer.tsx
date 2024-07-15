@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="w-full md:w-1/4 mb-6 md:mb-0 pr-6">
             <img src={logo} alt='Logo' className="mb-2 mx-0 w-1/2 h-auto" />
             <p className="text-sm text-left">
-              A collection of various tools to help you with various tasks.       </p>
+              Simple tools for simple tasks.       </p>
           </div>
           <div className="w-full md:w-3/4 flex flex-wrap -mx-2">
             <div className="w-full md:w-1/4 mb-4 px-2">

@@ -51,8 +51,9 @@ const WhyChooseJuju: React.FC = () => {
 
   return (
     <section className="px-4 py-12 bg-white dark:bg-gray-900">
-      <div className="container mx-auto bg-gray-100 dark:bg-gray-900 rounded-lg px-4 py-16 ">
-        <h2 className="text-4xl font-bold text-center mb-12">Why Choose Juju?</h2>
+      <div className="container mx-auto bg-gray-100 dark:bg-gray-900 rounded-lg px-4 py-16 text-center ">
+        <h2 className="text-4xl font-bold text-center mb-2">Why Choose Juju?</h2>
+        <p className="text-md mb-8">A handy toolbox for your digital life</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Feature key={index} {...feature} />

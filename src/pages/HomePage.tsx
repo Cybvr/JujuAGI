@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
       <section className="bg-gray-50 dark:bg-gray-800 text-black dark:text-white py-24 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-2">Meet your sidekick</h1>
-          <p className="text-xl mb-8">A Collection of simple tools for various tasks</p>
+          <p className="text-md mb-8">A Collection of simple tools for simple tasks</p>
           <div className="mb-8 relative">
             <form onSubmit={handleSearch} className="flex items-center justify-center">
               <input 
@@ -64,9 +64,10 @@ const HomePage: React.FC = () => {
       <InstallGuide />
 
       {/* Pricing Section */}
-      <section id="pricing" className="bg-gray-50 dark:bg-gray-900 py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Pricing</h2>
+      <section id="pricing" className="bg-gray-50 dark:bg-gray-900 px-4 py-12">
+        <div className="container mx-auto px-4 py-16 text-center ">
+          <h2 className="text-4xl font-bold text-center mb-2 text-gray-800 dark:text-white">Pricing</h2>
+          <p className="text-md mb-8">Keeping it simple for your wallet</p>
           <PricingPlans />
         </div>
       </section>
