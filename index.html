@@ -2,23 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/logos/favicon.svg" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#164fff">
-    <link rel="apple-touch-icon" href="/icon-192x192.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juju</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/index.tsx" as="script" type="module">
+    <link rel="preload" href="/node_modules/.vite/deps/react.js?v=328122d4" as="script">
+    <link rel="preload" href="/node_modules/.vite/deps/react-dom_client.js?v=da015d6c" as="script">
+    <link rel="preload" href="/node_modules/.vite/deps/react-router-dom.js?v=6bb32634" as="script">
+    
+    <!-- Favicon and app icons -->
+    <link rel="icon" type="image/svg+xml" href="/src/assets/logos/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
+    
+    <!-- Web app manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#164fff">
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Inline critical CSS -->
+    <style>
+      body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+      #root { min-height: 100vh; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
-
-    <!--
-    This script places a badge on your repl's full-browser view back to your repl's cover
-    page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
-    teal, blue, blurple, magenta, pink!
-    -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
   </body>
 </html>

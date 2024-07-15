@@ -50,28 +50,30 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
     <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 border-b border-gray-300 dark:border-gray-700">
       <nav className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center">
-            <img 
-              src={logo} 
-              alt="Juju Logo" 
-              className="w-32 h-10 hidden md:block" 
-            />
-            <img 
-              src={mobilelogo} 
-              alt="Juju Logo" 
-              className="w-10 h-10 md:hidden" 
-            />
-          </Link>
-          <div className="hidden md:flex space-x-4 items-center">
-            {menuItems.map((item) => (
-              <button
-                key={item.path}
-                onClick={() => handleNavigation(item.path)}
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-              >
-                {item.name}
-              </button>
-            ))}
+          <div className="flex items-center space-x-4">
+            <Link to="/" className="flex items-center">
+              <img 
+                src={logo} 
+                alt="Juju Logo" 
+                className="w-32 h-10 hidden md:block" 
+              />
+              <img 
+                src={mobilelogo} 
+                alt="Juju Logo" 
+                className="w-10 h-10 md:hidden" 
+              />
+            </Link>
+            <div className="hidden md:flex space-x-4 items-center">
+              {menuItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => handleNavigation(item.path)}
+                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="flex items-center space-x-4">
             <button

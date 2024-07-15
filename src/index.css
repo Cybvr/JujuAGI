@@ -1,4 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import 'typography.css';
+
+@layer base {
+  @font-face {
+    font-family: 'Aeonik';
+    src: url('./assets/fonts/Aeonik-Regular.woff2') format('woff2'),
+         url('./assets/fonts/Aeonik-Regular.woff') format('woff'),
+         url('./assets/fonts/Aeonik-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Aeonik';
+    src: url('./assets/fonts/Aeonik-Bold.woff2') format('woff2'),
+         url('./assets/fonts/Aeonik-Bold.woff') format('woff'),
+         url('./assets/fonts/Aeonik-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Add more @font-face rules for additional weights/styles if needed */
+
+  html {
+    font-family: Aeonik, Inter, system-ui, sans-serif;
+  }
+}

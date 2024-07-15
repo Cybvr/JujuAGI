@@ -68,12 +68,12 @@ const PrivacyPolicy = () => {
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
           <p className="text-gray-700">
-            Email: privacy@juju.com<br />
-            Address: [Your Company Address]
+            Email: art@visual.ng<br />
+            Address:  Plot 1 block, Marwa busstop, 128 Remi Olowude St, Lekki Phase I, Lekki 105102, Lagos, Nigeria
           </p>
 
           <p className="text-gray-700 mt-6">
-            Last updated: [Insert Date]
+            Last updated: 14th July, 2024
           </p>
         </div>
       </div>
