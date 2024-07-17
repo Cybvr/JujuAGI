@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Settings, CreditCard, HelpCircle, LogOut } from 'lucide-react';
+import { Home, Settings, CreditCard, HelpCircle, LogOut, Menu, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
-
-// Import your menu components
 import DashboardContent from '../components/settings/DashboardContent';
 import SettingsComponent from '../components/settings/SettingsComponent';
 import Subscription from '../components/settings/Subscription';
@@ -25,8 +23,9 @@ interface MenuItem {
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { currentUser, logOut } = useAuth();
+  const { logOut } = useAuth();
   const [activeMenu, setActiveMenu] = useState<MenuItemName>(MenuItemName.Dashboard);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
@@ -47,14 +46,32 @@ const Dashboard: React.FC = () => {
 
   const ActiveComponent = menuItems.find(item => item.name === activeMenu)?.component || DashboardContent;
 
+  const handleMenuItemClick = (name: MenuItemName) => {
+    setActiveMenu(name);
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const renderMenuItem = (item: MenuItem) => (
     <button
       key={item.name}
-      onClick={() => setActiveMenu(item.name)}
+      onClick={() => handleMenuItemClick(item.name)}
       className={`flex items-center w-full px-4 py-2 mt-2 text-left rounded-md ${
         activeMenu === item.name
-          ? 'bg-gray-200 dark:bg-gray-700 text-blue-600 dark:text-blue-400'
-          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+          ? 'bg-zinc-200 dark:bg-zinc-700 text-blue-600 dark:text-blue-400'
+          : 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
       }`}
     >
       <item.icon className="w-5 h-5 mr-3" />
@@ -63,24 +80,51 @@ const Dashboard: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900">
       <Header darkMode={false} setDarkMode={() => {}} />
       <div className="container mx-auto px-4 py-8">
-        <div className="flex">
-          <aside className="block md:block w-64 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mr-8">
+        <div className="flex flex-col md:flex-row">
+          {/* Mobile Dropdown */}
+          <div className="md:hidden mb-4" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center justify-between w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 rounded-lg"
+            >
+              <span className="text-zinc-800 dark:text-zinc-200">Menu</span>
+              {isDropdownOpen ? <X /> : <Menu />}
+            </button>
+            {isDropdownOpen && (
+              <div className="mt-2 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                <nav className="p-2">
+                  {menuItems.map(renderMenuItem)}
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center w-full px-4 py-2 mt-2 text-left text-red-500 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-md"
+                  >
+                    <LogOut className="w-5 h-5 mr-3" />
+                    Log out
+                  </button>
+                </nav>
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar for desktop */}
+          <aside className="hidden md:block w-64 bg-gray-50 dark:bg-zinc-800 rounded-lg p-4 mr-8">
             <nav>
               {menuItems.map(renderMenuItem)}
               <button
                 onClick={handleLogout}
-                className="flex items-center w-full px-4 py-2 mt-2 text-left text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                className="flex items-center w-full px-4 py-2 mt-2 text-left text-red-500 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-md"
               >
                 <LogOut className="w-5 h-5 mr-3" />
                 Log out
               </button>
             </nav>
           </aside>
-          <main className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-            <h2 className="text-3xl font-bold mb-8">Welcome, {currentUser?.email || 'User'}!</h2>
+
+          {/* Main Content */}
+          <main className="flex-1 bg-zinc-50 dark:bg-zinc-800 rounded-lg p-8">
             <ActiveComponent />
           </main>
         </div>

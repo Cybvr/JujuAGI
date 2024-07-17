@@ -44,14 +44,14 @@ const FAQSection: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-800">
+    <section className="py-16 bg-white dark:bg-zinc-800">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
             <div key={index} className="mb-4">
               <button
-                className="flex justify-between items-center w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="flex justify-between items-center w-full p-5 font-medium text-left text-zinc-500 border border-zinc-200 focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-800 dark:border-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                 onClick={() => toggleAccordion(index)}
               >
                 <span>{faq.question}</span>
@@ -62,8 +62,8 @@ const FAQSection: React.FC = () => {
                 )}
               </button>
               {openIndex === index && (
-                <div className="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
-                  <p className="mb-2 text-gray-500 dark:text-gray-400">{faq.answer}</p>
+                <div className="p-5 border border-t-0 border-zinc-200 dark:border-zinc-700">
+                  <p className="mb-2 text-zinc-500 dark:text-zinc-400">{faq.answer}</p>
                 </div>
               )}
             </div>

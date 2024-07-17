@@ -17,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
 
   const menuItems = [
+    { name: 'All', path: '/all-tools' },
     { name: 'Image', path: '/all-tools?category=image' },
     { name: 'PDF', path: '/all-tools?category=pdf' },
     { name: 'Writing', path: '/all-tools?category=writing' },
@@ -46,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10 border-b border-gray-300 dark:border-gray-700">
+    <header className="bg-white dark:bg-zinc-800 shadow-sm sticky top-0 z-10 border-b border-zinc-300 dark:border-zinc-700 hidden md:block">
       <nav className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -67,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
                 <button
                   key={item.path}
                   onClick={() => handleNavigation(item.path)}
-                  className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {item.name}
                 </button>
@@ -77,13 +78,13 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleDarkMode}
-              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Link
               to="/pricing"
-              className="hidden md:block bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600"
+              className="hidden md:block bg-white dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-600 border border-zinc-300 dark:border-zinc-600"
             >
               Pro Access
             </Link>
@@ -98,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
               </Link>
             )}
             <button
-              className="md:hidden text-gray-600 dark:text-gray-300"
+              className="md:hidden text-zinc-600 dark:text-zinc-300"
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -111,14 +112,14 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
               <button
                 key={item.path}
                 onClick={() => handleNavigation(item.path)}
-                className="block w-full text-left py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                className="block w-full text-left py-2 text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {item.name}
               </button>
             ))}
             <Link
               to="/pricing"
-              className="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="block py-2 text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
               onClick={() => setMenuOpen(false)}
             >
               Pro Access

@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FileText, 
-          Image, 
-          ArrowRightLeft, 
-          Scissors, 
-          Edit, 
-          BookOpen, 
-          Check, 
-          Search, 
-          Layers, 
-          Minimize, 
-          Repeat, 
-          FileDown, 
-          FileSpreadsheet, 
-          FileJson } from 'lucide-react';
+import {
+  FileText,
+    Hash,
+    Type,
+    Image,
+    ArrowRightLeft,
+    Scissors,
+    Edit,
+    BookOpen,
+    Check,
+    Search,
+    Layers,
+    Minimize,
+    Repeat,
+    FileDown,
+    FileSpreadsheet,
+    FileJson,
+} from 'lucide-react';
 
 interface Tool {
   icon: React.ReactNode;
@@ -65,6 +69,34 @@ const AllToolsPage: React.FC = () => {
       category: "pdf"
     },
     // Writing tools
+    {
+      icon: <Edit size={32} />,
+      title: "Text Case Converter",
+      description: "Convert text to UPPERCASE, lowercase, or Title Case.",
+      path: "/tool/text-case-converter",
+      category: "writing"
+    },
+    {
+      icon: <FileText size={32} />,
+      title: "Word Count",
+      description: "Count the words in your text.",
+      path: "/tool/word-count",
+      category: "writing"
+    },
+    {
+      icon: <Hash size={32} />,
+      title: "Character Count",
+      description: "Count the characters in your text.",
+      path: "/tool/character-count",
+      category: "writing"
+    },
+    {
+      icon: <Type size={32} />,
+      title: "Lorem Ipsum Generator",
+      description: "Generate Lorem Ipsum placeholder text.",
+      path: "/tool/lorem-ipsum",
+      category: "writing"
+    },
     {
       icon: <Edit size={32} />,
       title: "AI Resume Writer",
@@ -162,8 +194,8 @@ const AllToolsPage: React.FC = () => {
   const categories = ['all', 'pdf', 'image', 'writing', 'convert'];
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">All Tools</h1>
+    <div className="container mx-auto px-4 py-16 pb-36 ">
+      <h1 className="text-3xl font-bold mb-8 text-center">All Tools</h1>
       <div className="flex flex-wrap justify-center mb-8">
         {categories.map(category => (
           <Link
@@ -172,7 +204,7 @@ const AllToolsPage: React.FC = () => {
             className={`mx-2 px-4 py-2 rounded-md mb-2 ${
               activeCategory === category
                 ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                : 'bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300'
             }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -181,10 +213,10 @@ const AllToolsPage: React.FC = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredTools.map((tool, index) => (
-          <Link key={index} to={tool.path} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+          <Link key={index} to={tool.path} className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="text-blue-600 dark:text-blue-400 mb-4">{tool.icon}</div>
             <h3 className="text-xl font-semibold mb-2 dark:text-white">{tool.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400">{tool.description}</p>
+            <p className="text-zinc-600 dark:text-zinc-400">{tool.description}</p>
           </Link>
         ))}
       </div>

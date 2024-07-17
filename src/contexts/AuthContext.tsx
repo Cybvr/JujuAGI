@@ -4,7 +4,8 @@ import {
   signOut, 
   signInWithPopup, 
   GoogleAuthProvider,
-  FacebookAuthProvider
+  FacebookAuthProvider,
+  updateProfile as firebaseUpdateProfile
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
@@ -13,13 +14,15 @@ interface AuthContextType {
   loading: boolean;
   signIn: (provider: 'google' | 'facebook') => Promise<void>;
   logOut: () => Promise<void>;
+  updateProfile: (profileData: { displayName?: string; photoURL?: string }) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   currentUser: null,
   loading: true,
   signIn: async () => {},
-  logOut: async () => {}
+  logOut: async () => {},
+  updateProfile: async () => {}
 });
 
 export function useAuth() {
@@ -56,12 +59,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logOut = async () => {
     await signOut(auth);
   };
+  const updateProfile = async (profileData: { displayName?: string; photoURL?: string }) => {
+    if (!currentUser) throw new Error('No user logged in');
+    await firebaseUpdateProfile(currentUser, profileData);
+    // Update the local user state to reflect changes
+    setCurrentUser({ ...currentUser, ...profileData });
+  };
 
   const value = {
     currentUser,
     loading,
     signIn,
-    logOut
+    logOut,
+    updateProfile
   };
 
   return (

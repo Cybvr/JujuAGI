@@ -18,11 +18,11 @@ const SettingsPage = () => {
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-12">Settings</h1>
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-zinc-50 p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Account Settings</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+              <label className="block text-zinc-700 mb-2" htmlFor="email">Email</label>
               <input 
                 type="email" 
                 id="email" 
@@ -32,7 +32,7 @@ const SettingsPage = () => {
               />
             </div>
             <div>
-              <label className="block text-gray-700 mb-2" htmlFor="password">Change Password</label>
+              <label className="block text-zinc-700 mb-2" htmlFor="password">Change Password</label>
               <input 
                 type="password" 
                 id="password" 

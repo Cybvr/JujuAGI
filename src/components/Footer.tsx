@@ -5,7 +5,7 @@ import logo from '../logoblack.png';  // Adjust the path as necessary
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 py-8">
+    <footer className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap text-left">
           <div className="w-full md:w-1/4 mb-6 md:mb-0 pr-6">
@@ -37,8 +37,10 @@ const Footer: React.FC = () => {
               <ul>
                 <li><Link to="/privacy" className="hover:text-blue-400">Privacy Policy</Link></li>
                 <li><Link to="/terms" className="hover:text-blue-400">Terms of Service</Link></li>
+                <li><Link to="/data-deletion" className="text-blue-500 hover:text-blue-600">Data Protection</Link></li>
                 <li><Link to="/Legal" className="hover:text-blue-400">Legal</Link></li>
               </ul>
+              
             </div>
             <div className="w-full md:w-1/4 mb-4 px-2">
               <h4 className="text-lg font-semibold mb-2">Social</h4>

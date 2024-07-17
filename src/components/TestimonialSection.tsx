@@ -33,8 +33,8 @@ const TestimonialSection: React.FC = () => {
         <h2 className="text-3xl font-bold text-center text-white mb-12">What Our Users Say</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white dark:bg-gray-900 rounded-lg p-6 ">
-              <p className="text-gray-600 text-center mb-4">"{testimonial.comment}"</p>
+            <div key={index} className="bg-white dark:bg-zinc-900 rounded-lg p-6 ">
+              <p className="text-zinc-600 text-center mb-4">"{testimonial.comment}"</p>
               <div className="flex flex-col items-center">
                 <img 
                   src={testimonial.avatar} 
@@ -42,7 +42,7 @@ const TestimonialSection: React.FC = () => {
                   className="w-16 h-16 rounded-full mb-2"
                 />
                 <div className="font-semibold">{testimonial.name}</div>
-                <div className="text-sm text-gray-500 mb-2">{testimonial.role}</div>
+                <div className="text-sm text-zinc-500 mb-2">{testimonial.role}</div>
                 <div className="flex">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />

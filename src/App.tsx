@@ -2,10 +2,12 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import MobileNavBar from './components/MobileNavBar';
 import Loading from './components/Loading';
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import InstallPrompt from './components/InstallPrompt';
+import DataDeletionPage from './pages/DataDeletionPage';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AllToolsPage = lazy(() => import('./pages/AllToolsPage'));
@@ -35,9 +37,14 @@ const SignupPage = lazy(() => import('./pages/SignupPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const ResumeWriter = lazy(() => import('./components/tools/writing/ResumeWriter'));
+const TextCaseConverter = lazy(() => import('./components/tools/writing/TextCaseConverter'));
+
 const EssayWriter = lazy(() => import('./components/tools/writing/EssayWriter'));
 const GrammarChecker = lazy(() => import('./components/tools/writing/GrammarChecker'));
 const PlagiarismDetector = lazy(() => import('./components/tools/writing/PlagiarismDetector'));
+const WordCount = lazy(() => import('./components/tools/writing/WordCountTool'));
+const CharacterCount = lazy(() => import('./components/tools/writing/CharacterCountTool'));
+const LoremIpsum = lazy(() => import('./components/tools/writing/LoremIpsumGenerator'));
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -48,7 +55,7 @@ function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isSignupPage = location.pathname === '/signup';
-  const isDashboardPage = location.pathname === '/dashboard';
+  const isDashboardPage = location.pathname.startsWith('/dashboard');
 
   useEffect(() => {
     if (darkMode) {
@@ -69,7 +76,7 @@ function App() {
         {!isLoginPage && !isSignupPage && !isDashboardPage && (
           <Header darkMode={darkMode} setDarkMode={toggleDarkMode} />
         )}
-        <main className={`${isDashboardPage ? 'dashboard-main' : ''}`}>
+        <main className="pb-16 md:pb-0">
           <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -85,7 +92,11 @@ function App() {
               <Route path="/tool/resume-writer" element={<ResumeWriter />} />
               <Route path="/tool/essay-writer" element={<EssayWriter />} />
               <Route path="/tool/grammar-checker" element={<GrammarChecker />} />
+              <Route path="/tool/text-case-converter" element={<TextCaseConverter />} />
               <Route path="/tool/plagiarism-detector" element={<PlagiarismDetector />} />
+              <Route path="/tool/word-count" element={<WordCount />} />
+              <Route path="/tool/character-count" element={<CharacterCount />} />
+              <Route path="/tool/lorem-ipsum" element={<LoremIpsum />} />
               <Route path="/tool/excel-to-pdf" element={<ExcelToPDF />} />
               <Route path="/tool/csv-to-excel" element={<CSVToExcel />} />
               <Route path="/tool/xml-to-json" element={<XMLToJSON />} />
@@ -101,6 +112,7 @@ function App() {
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/data-deletion" element={<DataDeletionPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/category/:category" element={<CategoryPage />} />
               <Route
@@ -115,6 +127,7 @@ function App() {
           </Suspense>
         </main>
         {!isLoginPage && !isSignupPage && !isDashboardPage && <Footer />}
+        {!isLoginPage && !isSignupPage && <MobileNavBar />}
         <InstallPrompt />
       </div>
     </AuthProvider>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Image, ArrowRightLeft, Scissors, Repeat, FileDown, Minimize, Layers, Edit, BookOpen, Check, Search } from 'lucide-react';
+import { FileText, Image, ArrowRightLeft, Scissors, Repeat, FileDown, Minimize, Layers, Edit, BookOpen, Hash, Check, Search, Type } from 'lucide-react';
 
 interface Tool {
   icon: React.ReactNode;
@@ -12,6 +12,21 @@ interface Tool {
 
 const ToolsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
+
+  const getCategoryColor = (category: string): string => {
+    switch (category) {
+      case 'PDF':
+        return 'text-red-500 dark:text-red-400';
+      case 'Image':
+        return 'text-green-500 dark:text-green-400';
+      case 'Writing':
+        return 'text-purple-500 dark:text-purple-400';
+      case 'Convert':
+        return 'text-yellow-500 dark:text-yellow-400';
+      default:
+        return 'text-blue-500 dark:text-blue-400';
+    }
+  };
 
   const tools: Tool[] = [
     // PDF tools
@@ -74,6 +89,34 @@ const ToolsSection: React.FC = () => {
     },
     // New Writing tools
     {
+      icon: <Type size={32} />,
+      title: "Text Case Converter",
+      description: "Convert text to UPPERCASE, lowercase, or Title Case.",
+      path: "/tool/text-case-converter",
+      category: "writing"
+    },
+    {
+      icon: <FileText size={32} />,
+      title: "Word Count",
+      description: "Count the words in your text.",
+      path: "/tool/word-count",
+      category: "writing"
+    },
+    {
+      icon: <Hash size={32} />,
+      title: "Character Count",
+      description: "Count the characters in your text.",
+      path: "/tool/character-count",
+      category: "writing"
+    },
+    {
+      icon: <Type size={32} />,
+      title: "Lorem Ipsum Generator",
+      description: "Generate Lorem Ipsum placeholder text.",
+      path: "/tool/lorem-ipsum",
+      category: "writing"
+    },
+    {
       icon: <Edit size={32} />,
       title: "AI Resume Writer",
       description: "Create professional resumes with AI assistance.",
@@ -101,7 +144,7 @@ const ToolsSection: React.FC = () => {
       path: "/tool/plagiarism-detector",
       category: "Writing"
     },
-  ];
+];
 
   const categories = ['All', 'PDF', 'Image', 'Writing', 'Convert'];
 
@@ -110,10 +153,10 @@ const ToolsSection: React.FC = () => {
     : tools.filter(tool => tool.category === activeCategory);
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4 text-center" >
-        <h2 className="text-4xl font-bold text-center mb-2">Our Tools</h2>
-        <p className="text-md mb-8">Free resources that allow you to organize, create and save time on your work</p>
+    <section className="pt-4 pb-20 bg-white dark:bg-zinc-800">
+      <div className="container mx-auto px-10 text-left bg-zinc-50 dark:bg-zinc-700 py-20 rounded-lg" >
+        <h2 className="text-4xl font-bold text-center mb-2 dark:text-white">Our Tools</h2>
+        <p className="text-md mb-8 text-center text-zinc-400 dark:text-zinc-300">Free resources that allow you to organize, create and save time on your work</p>
         <div className="flex flex-wrap justify-center mb-8">
           {categories.map(category => (
             <button
@@ -121,7 +164,7 @@ const ToolsSection: React.FC = () => {
               className={`mx-2 px-4 py-2 rounded-md mb-2 ${
                 activeCategory === category
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-500'
               }`}
               onClick={() => setActiveCategory(category)}
             >
@@ -131,10 +174,10 @@ const ToolsSection: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredTools.map((tool, index) => (
-            <Link key={index} to={tool.path} className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-              <div className="text-blue-600 dark:text-blue-400 mb-4">{tool.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">{tool.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{tool.description}</p>
+            <Link key={index} to={tool.path} className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className={`${getCategoryColor(tool.category)} mb-4`}>{tool.icon}</div>
+              <h3 className="text-mb font-semibold mb-2 dark:text-white">{tool.title}</h3>
+              <p className="text-zinc-600 dark:text-zinc-400">{tool.description}</p>
             </Link>
           ))}
         </div>

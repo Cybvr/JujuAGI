@@ -29,7 +29,7 @@ const InstallPrompt: React.FC = () => {
       <p className="mb-2">Install Juju for easier access!</p>
       <button 
         onClick={handleInstallClick}
-        className="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-100"
+        className="bg-white text-blue-500 px-4 py-2 rounded hover:bg-zinc-100"
       >
         Install
       </button>
