@@ -17,11 +17,12 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { name: 'All', path: '/all-tools' },
+    { name: 'All Tools', path: '/all-tools' },
     { name: 'Image', path: '/all-tools?category=image' },
     { name: 'PDF', path: '/all-tools?category=pdf' },
     { name: 'Writing', path: '/all-tools?category=writing' },
     { name: 'Convert', path: '/all-tools?category=convert' },
+    { name: 'Pricing', path: '/pricing' },
   ];
 
   useEffect(() => {
@@ -38,11 +39,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
   };
 
   const handleNavigation = (path: string) => {
-    if (path === '/') {
-      navigate(path);
-    } else {
-      navigate(`/category/${path}`);
-    }
+    navigate(path);
     setMenuOpen(false);
   };
 
@@ -50,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
     <header className="bg-white dark:bg-zinc-800 shadow-sm sticky top-0 z-10 border-b border-zinc-300 dark:border-zinc-700 hidden md:block">
       <nav className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-12">
             <Link to="/" className="flex items-center">
               <img 
                 src={logo} 
@@ -68,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
                 <button
                   key={item.path}
                   onClick={() => handleNavigation(item.path)}
-                  className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  className="text-zinc-500 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
                 >
                   {item.name}
                 </button>
@@ -82,21 +79,23 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <Link
-              to="/pricing"
-              className="hidden md:block bg-white dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-600 border border-zinc-300 dark:border-zinc-600"
-            >
-              Pro Access
-            </Link>
             {currentUser ? (
               <UserMenu />
             ) : (
-              <Link
-                to="/login"
-                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-              >
-                Sign In
-              </Link>
+              <>
+                <Link
+                  to="/login"
+                  className="bg-white dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-600 border border-zinc-300 dark:border-zinc-600"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                >
+                  Sign Up
+                </Link>
+              </>
             )}
             <button
               className="md:hidden text-zinc-600 dark:text-zinc-300"
@@ -117,13 +116,6 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode }) => {
                 {item.name}
               </button>
             ))}
-            <Link
-              to="/pricing"
-              className="block py-2 text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              Pro Access
-            </Link>
           </div>
         )}
       </nav>

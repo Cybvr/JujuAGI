@@ -1,52 +1,83 @@
-import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { useState } from 'react';
+import { PDFDocument } from 'pdf-lib';
 import ToolPage from '../common/ToolPage';
 
 const JPGtoPDFTool: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles(acceptedFiles);
-    console.log("Files accepted:", acceptedFiles.map(file => file.name));
-  }, []);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFiles(Array.from(event.target.files));
+      setPdfUrl(null);
+    }
+  };
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: { 'image/jpeg': ['.jpg', '.jpeg'] },
-    multiple: true
-  });
+  const convertToPDF = async () => {
+    if (files.length === 0) return;
+
+    const pdfDoc = await PDFDocument.create();
+
+    for (const file of files) {
+      const imageBytes = await file.arrayBuffer();
+      const image = await pdfDoc.embedJpg(imageBytes);
+      const page = pdfDoc.addPage([image.width, image.height]);
+      page.drawImage(image, {
+        x: 0,
+        y: 0,
+        width: image.width,
+        height: image.height,
+      });
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+    setPdfUrl(URL.createObjectURL(pdfBlob));
+  };
 
   return (
-    <div 
-      {...getRootProps()} 
-      className="bg-blue-500 p-16 rounded-lg text-center text-white cursor-pointer"
-    >
-      <input {...getInputProps()} />
-      <button className="bg-white text-blue-500 px-4 py-2 rounded">
-        Choose JPG files
+    <div className="space-y-4">
+      <input 
+        type="file" 
+        accept=".jpg,.jpeg" 
+        multiple 
+        onChange={handleFileChange} 
+        className="w-full p-2 border rounded"
+      />
+      <button 
+        onClick={convertToPDF} 
+        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        disabled={files.length === 0}
+      >
+        Convert JPGs to PDF
       </button>
-      <p className="mt-2">or drop JPG files here</p>
-      {files.length > 0 && (
-        <p className="mt-2">Selected files: {files.map(file => file.name).join(', ')}</p>
+      {pdfUrl && (
+        <div className="space-y-2">
+          <p>PDF created successfully!</p>
+          <a 
+            href={pdfUrl} 
+            download="converted.pdf"
+            className="block text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          >
+            Download PDF
+          </a>
+        </div>
       )}
     </div>
   );
 };
 
 const JPGtoPDFInstructions: React.FC = () => (
-  <>
-    <h3 className="text-xl font-semibold mb-4">Steps:</h3>
-    <ol className="list-decimal list-inside space-y-2">
-      <li>Select one or more JPG images you want to convert.</li>
-      <li>Our system will process your images and combine them into a single PDF file.</li>
-      <li>Download your converted PDF file.</li>
-    </ol>
-  </>
+  <ol className="list-decimal list-inside space-y-2">
+    <li>Upload one or more JPG files using the file input.</li>
+    <li>Click "Convert JPGs to PDF" to create a PDF from your images.</li>
+    <li>Once converted, you can download the resulting PDF file.</li>
+  </ol>
 );
 
 const JPGtoPDF: React.FC = () => (
   <ToolPage
-    title="Convert JPG to PDF"
+    title="JPG to PDF Converter"
     toolComponent={<JPGtoPDFTool />}
     instructions={<JPGtoPDFInstructions />}
     category="pdf"

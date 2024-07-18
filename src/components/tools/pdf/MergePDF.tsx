@@ -1,41 +1,61 @@
-import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { useState } from 'react';
+import { PDFDocument } from 'pdf-lib';
 import ToolPage from '../common/ToolPage';
 
 const MergePDFTool: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);
+  const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles(prev => [...prev, ...acceptedFiles]);
-    console.log("Files accepted:", acceptedFiles.map(file => file.name));
-  }, []);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFiles(Array.from(event.target.files));
+      setMergedPdfUrl(null);
+    }
+  };
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: { 'application/pdf': ['.pdf'] },
-    multiple: true
-  });
+  const mergePDFs = async () => {
+    if (files.length === 0) return;
+
+    const mergedPdf = await PDFDocument.create();
+
+    for (const file of files) {
+      const pdfBytes = await file.arrayBuffer();
+      const pdf = await PDFDocument.load(pdfBytes);
+      const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+      copiedPages.forEach((page) => mergedPdf.addPage(page));
+    }
+
+    const pdfBytes = await mergedPdf.save();
+    const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+    setMergedPdfUrl(URL.createObjectURL(pdfBlob));
+  };
 
   return (
     <div className="space-y-4">
-      <div 
-        {...getRootProps()} 
-        className="bg-blue-500 p-16 rounded-lg text-center text-white cursor-pointer"
+      <input 
+        type="file" 
+        accept=".pdf" 
+        multiple 
+        onChange={handleFileChange} 
+        className="w-full p-2 border rounded"
+      />
+      <button 
+        onClick={mergePDFs} 
+        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        disabled={files.length < 2}
       >
-        <input {...getInputProps()} />
-        <button className="bg-white text-blue-500 px-4 py-2 rounded">
-          Choose PDF files
-        </button>
-        <p className="mt-2">or drop PDF files here</p>
-      </div>
-      {files.length > 0 && (
-        <div className="bg-gray-100 p-4 rounded-lg">
-          <h3 className="font-semibold mb-2">Selected files:</h3>
-          <ul className="list-disc list-inside">
-            {files.map((file, index) => (
-              <li key={index}>{file.name}</li>
-            ))}
-          </ul>
+        Merge PDFs
+      </button>
+      {mergedPdfUrl && (
+        <div className="space-y-2">
+          <p>PDFs merged successfully!</p>
+          <a 
+            href={mergedPdfUrl} 
+            download="merged.pdf"
+            className="block text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          >
+            Download Merged PDF
+          </a>
         </div>
       )}
     </div>
@@ -43,15 +63,11 @@ const MergePDFTool: React.FC = () => {
 };
 
 const MergePDFInstructions: React.FC = () => (
-  <>
-    <h3 className="text-xl font-semibold mb-4">Steps:</h3>
-    <ol className="list-decimal list-inside space-y-2">
-      <li>Select two or more PDF files you want to merge.</li>
-      <li>Arrange the files in the order you want them to appear in the final document.</li>
-      <li>Click "Merge PDFs" to combine the files.</li>
-      <li>Download your merged PDF file.</li>
-    </ol>
-  </>
+  <ol className="list-decimal list-inside space-y-2">
+    <li>Upload two or more PDF files using the file input.</li>
+    <li>Click "Merge PDFs" to combine the uploaded PDFs into a single file.</li>
+    <li>Once merged, you can download the resulting PDF file.</li>
+  </ol>
 );
 
 const MergePDF: React.FC = () => (
