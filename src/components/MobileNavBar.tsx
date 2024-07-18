@@ -14,8 +14,8 @@ const MobileNavBar: React.FC = () => {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 shadow-top py-8">
-      <ul className="flex justify-around items-center h-16">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-800 shadow-top py-4">
+      <ul className="flex justify-around items-center h-10">
         {navItems.map((item) => {
           const IconComponent = item.icon;
           const isActive = location.pathname === item.path;

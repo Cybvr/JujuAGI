@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
+import FlutterwavePayment from '../payments/FlutterwavePayment';
+
+interface Feature {
+  name: string;
+  included: boolean;
+}
+
+interface Plan {
+  name: string;
+  price: string;
+  features: Feature[];
+  ctaText: string;
+  ctaLink: string;
+}
 
 const PricingPlans: React.FC = () => {
-  const plans = [
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+
+  const plans: Plan[] = [
     {
       name: 'Free',
       price: '$0',
@@ -37,6 +55,16 @@ const PricingPlans: React.FC = () => {
     },
   ];
 
+  const handlePaymentSuccess = (response: any) => {
+    console.log('Payment successful', response);
+    // Implement your logic for successful payment
+  };
+
+  const handlePaymentFailure = (error: any) => {
+    console.error('Payment failed', error);
+    // Implement your logic for failed payment
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-center items-stretch gap-8">
       {plans.map((plan) => (
@@ -60,16 +88,46 @@ const PricingPlans: React.FC = () => {
               </li>
             ))}
           </ul>
-          <Link
-            to={plan.ctaLink}
-            className={`${
-              plan.name === 'Lifetime Access'
-                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                : 'bg-zinc-200 text-zinc-800 hover:bg-zinc-300'
-            } px-6 py-2 rounded-md font-semibold transition duration-300 text-center`}
-          >
-            {plan.ctaText}
-          </Link>
+          {plan.name === 'Lifetime Access' ? (
+            <>
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                className="mb-2 p-2 border rounded"
+              />
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
+                className="mb-2 p-2 border rounded"
+              />
+              <input
+                type="tel"
+                placeholder="Your Phone"
+                value={customerPhone}
+                onChange={(e) => setCustomerPhone(e.target.value)}
+                className="mb-2 p-2 border rounded"
+              />
+              <FlutterwavePayment
+                amount={20}
+                customerEmail={customerEmail}
+                customerName={customerName}
+                customerPhone={customerPhone}
+                onSuccess={handlePaymentSuccess}
+                onFailure={handlePaymentFailure}
+              />
+            </>
+          ) : (
+            <Link
+              to={plan.ctaLink}
+              className="bg-zinc-200 text-zinc-800 px-6 py-2 rounded-md font-semibold hover:bg-zinc-300 transition duration-300 text-center"
+            >
+              {plan.ctaText}
+            </Link>
+          )}
         </div>
       ))}
     </div>

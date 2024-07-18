@@ -11,28 +11,28 @@ interface NewTool {
 const WhatsNewSection: React.FC = () => {
   const newTools: NewTool[] = [
     {
-      title: "PDF to JPG",
-      path: "/tool/pdf-to-jpg",
-      image: "src/assets/images/ui/image1.png",
+      title: "Remove Background",
+      path: "/tool/remove-background",
+      image: "/src/assets/images/ui/image1.png",
       bgColor: "bg-orange-600"
     },
     {
-      title: "JPG to PDF",
-      path: "/tool/jpg-to-pdf",
-      image: "src/assets/images/ui/image2.png",
+      title: "Compress Image",
+      path: "/tool/image-compressor",
+      image: "/src/assets/images/ui/image2.png",
       bgColor: "bg-green-600"
     },
     {
-      title: "Merge PDF",
-      path: "/tool/merge-pdf",
-      image: "src/assets/images/ui/image3.png",
-      bgColor: "bg-yellow-100"
+      title: "Resume Writer",
+      path: "/tool/resume-writer",
+      image: "/src/assets/images/ui/image3.png",
+      bgColor: "bg-indigo-800"
     },
     {
-      title: "Split PDF",
-      path: "/tool/split-pdf",
-      image: "src/assets/images/ui/image4.png",
-      bgColor: "bg-pink-100"
+      title: "Compress PDF",
+      path: "/tool/compress-pdf",
+      image: "/src/assets/images/ui/image4.png",
+      bgColor: "bg-pink-800"
     }
   ];
 
@@ -43,11 +43,15 @@ const WhatsNewSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {newTools.map((tool, index) => (
             <Link key={index} to={tool.path} className="group">
-              <div className={`rounded-lg overflow-hidden transition-all duration-300  ${tool.bgColor}`}>
-                <div className="p-4 pb-0 ">
+              <div className={`rounded-lg overflow-hidden transition-all duration-300 ${tool.bgColor}`}>
+                <div className="p-6 pb-0 ">
                   <h3 className="text-md text-white font-semibold text-center mb-4">{tool.title}</h3>
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src={tool.image} alt={tool.title} className="object-cover rounded" />
+                    <img 
+                      src={tool.image} 
+                      alt={tool.title} 
+                      className="object-cover w-full h-full" 
+                    />
                   </div>
                 </div>
               </div>
