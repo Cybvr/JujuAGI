@@ -3,7 +3,7 @@ import { Smartphone, Monitor, Plus } from 'lucide-react';
 
 const InstallGuide = () => {
   return (
-    <section className="bg-zinc-100 dark:bg-zinc-800 py-20">
+    <section className="bg-sky-50 dark:bg-zinc-800 py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12">Download Juju</h2>
         <div className="grid md:grid-cols-2 gap-12">

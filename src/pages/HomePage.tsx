@@ -8,6 +8,7 @@ import InstallGuide from '../components/InstallGuide';
 import PricingPlans from '../components/PricingPlans';
 import TestimonialSection from '../components/TestimonialSection';
 import FAQSection from '../components/FAQSection';
+import WhatsNewSection from '../components/WhatsNewSection';
 
 const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -47,6 +48,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Rest of the sections remain the same */}
+      <WhatsNewSection />
       <ToolsSection />
       <WhyChooseJuju />
       <InstallGuide />
