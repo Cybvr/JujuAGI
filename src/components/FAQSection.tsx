@@ -7,27 +7,17 @@ const FAQSection: React.FC = () => {
   const faqs = [
     {
       question: "What is Juju?",
-      answer: "Juju is an all-in-one platform offering various file conversion and editing tools, including AI writing assistance, plagiarism checking, and OCR capabilities."
+      answer: "Juju is an all-in-one platform offering various file conversion and editing tools, including AI writing assistance, image resizing, and pdf compression tools."
     },
     {
       question: "Is Juju free to use?",
       answer: "Juju offers both free and premium plans. The free plan provides access to basic features, while premium plans unlock additional tools and benefits."
     },
-    {
-      question: "How does the AI Writing Assistant work?",
-      answer: "Our AI Writing Assistant uses advanced natural language processing to help you generate, edit, and improve your content across various formats and styles."
-    },
-    {
-      question: "Can I use Juju for academic purposes?",
-      answer: "Yes, Juju's tools, especially the Plagiarism Checker, are designed to assist students and researchers in maintaining academic integrity and improving their work."
-    },
+    
+  
     {
       question: "What file formats does Juju support?",
       answer: "Juju supports a wide range of file formats including PDFs, images, audio files, and various document types. Check our tools section for specific format support."
-    },
-    {
-      question: "How accurate is the Plagiarism Checker?",
-      answer: "Our Plagiarism Checker uses extensive databases and advanced algorithms to provide highly accurate results, helping you ensure the originality of your content."
     },
     {
       question: "Is my data safe with Juju?",

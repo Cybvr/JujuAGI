@@ -10,8 +10,9 @@ import InstallPrompt from './components/InstallPrompt';
 import DataDeletionPage from './pages/DataDeletionPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollToTop from './components/ScrollToTop';
-
+import CookiePopup from './components/CookiePopup';
 const HomePage = lazy(() => import('./pages/HomePage'));
+const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AllToolsPage = lazy(() => import('./pages/AllToolsPage'));
 const PDFtoJPG = lazy(() => import('./components/tools/pdf/PDFtoJPG'));
 const JPGtoPDF = lazy(() => import('./components/tools/pdf/JPGtoPDF'));
@@ -72,13 +73,36 @@ function App() {
     setDarkMode((prevMode: boolean) => !prevMode);
   };
 
+  const tools = [
+    { name: 'PDF to JPG', path: '/tool/pdf-to-jpg' },
+    { name: 'JPG to PDF', path: '/tool/jpg-to-pdf' },
+    { name: 'Merge PDF', path: '/tool/merge-pdf' },
+    { name: 'Split PDF', path: '/tool/split-pdf' },
+    { name: 'Remove Background', path: '/tool/remove-background' },
+    { name: 'Image Resizer', path: '/tool/image-resizer' },
+    { name: 'Image Converter', path: '/tool/image-converter' },
+    { name: 'Image Compressor', path: '/tool/image-compressor' },
+    { name: 'Resume Writer', path: '/tool/resume-writer' },
+    { name: 'Essay Writer', path: '/tool/essay-writer' },
+    { name: 'Grammar Checker', path: '/tool/grammar-checker' },
+    { name: 'Text Case Converter', path: '/tool/text-case-converter' },
+    { name: 'Plagiarism Detector', path: '/tool/plagiarism-detector' },
+    { name: 'Word Count', path: '/tool/word-count' },
+    { name: 'Character Count', path: '/tool/character-count' },
+    { name: 'Lorem Ipsum Generator', path: '/tool/lorem-ipsum' },
+    { name: 'Excel to PDF', path: '/tool/excel-to-pdf' },
+    { name: 'CSV to Excel', path: '/tool/csv-to-excel' },
+    { name: 'XML to JSON', path: '/tool/xml-to-json' },
+    { name: 'XML to CSV', path: '/tool/xml-to-csv' },
+  ];
+
   return (
     <ErrorBoundary>
       <AuthProvider>
         <ScrollToTop />
         <div className={`min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white ${darkMode ? 'dark' : ''}`}>
           {!isLoginPage && !isSignupPage && !isDashboardPage && (
-            <Header darkMode={darkMode} setDarkMode={toggleDarkMode} />
+            <Header darkMode={darkMode} setDarkMode={toggleDarkMode} tools={tools} />
           )}
           <main className="pb-16 md:pb-0">
             <Suspense fallback={<Loading />}>
@@ -110,6 +134,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
                 <Route path="/legal" element={<Legal />} />
+                <Route path="/cookies" element={<CookiesPage />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsAndConditions />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -131,8 +156,9 @@ function App() {
             </Suspense>
           </main>
           {!isLoginPage && !isSignupPage && !isDashboardPage && <Footer />}
-          {!isLoginPage && !isSignupPage && <MobileNavBar />}
+          <MobileNavBar />
           <InstallPrompt />
+          <CookiePopup />
         </div>
       </AuthProvider>
     </ErrorBoundary>

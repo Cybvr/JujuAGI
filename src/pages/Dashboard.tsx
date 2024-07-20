@@ -79,9 +79,32 @@ const Dashboard: React.FC = () => {
     </button>
   );
 
+  const tools = [
+    { name: 'PDF to JPG', path: '/tool/pdf-to-jpg' },
+    { name: 'JPG to PDF', path: '/tool/jpg-to-pdf' },
+    { name: 'Merge PDF', path: '/tool/merge-pdf' },
+    { name: 'Split PDF', path: '/tool/split-pdf' },
+    { name: 'Remove Background', path: '/tool/remove-background' },
+    { name: 'Image Resizer', path: '/tool/image-resizer' },
+    { name: 'Image Converter', path: '/tool/image-converter' },
+    { name: 'Image Compressor', path: '/tool/image-compressor' },
+    { name: 'Resume Writer', path: '/tool/resume-writer' },
+    { name: 'Essay Writer', path: '/tool/essay-writer' },
+    { name: 'Grammar Checker', path: '/tool/grammar-checker' },
+    { name: 'Text Case Converter', path: '/tool/text-case-converter' },
+    { name: 'Plagiarism Detector', path: '/tool/plagiarism-detector' },
+    { name: 'Word Count', path: '/tool/word-count' },
+    { name: 'Character Count', path: '/tool/character-count' },
+    { name: 'Lorem Ipsum Generator', path: '/tool/lorem-ipsum' },
+    { name: 'Excel to PDF', path: '/tool/excel-to-pdf' },
+    { name: 'CSV to Excel', path: '/tool/csv-to-excel' },
+    { name: 'XML to JSON', path: '/tool/xml-to-json' },
+    { name: 'XML to CSV', path: '/tool/xml-to-csv' },
+  ];
+
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900">
-      <Header darkMode={false} setDarkMode={() => {}} />
+      <Header darkMode={false} setDarkMode={() => {}} tools={tools} />
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row">
           {/* Mobile Dropdown */}

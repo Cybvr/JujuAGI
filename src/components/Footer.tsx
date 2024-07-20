@@ -36,9 +36,9 @@ const Footer: React.FC = () => {
               <h4 className="text-lg font-semibold mb-2">Legal</h4>
               <ul>
                 <li><Link to="/privacy" className="hover:text-blue-400">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-blue-400">Terms of Service</Link></li>
+                <li><Link to="/terms" className="hover:text-blue-400">Terms & Agreement</Link></li>
                 <li><Link to="/data-deletion" className="text-blue-500 hover:text-blue-600">Data Protection</Link></li>
-                <li><Link to="/Legal" className="hover:text-blue-400">Legal</Link></li>
+                <li><Link to="/cookies" className="hover:text-blue-400">Cookies</Link></li>
               </ul>
               
             </div>
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2024 Juju. All rights reserved. Made with ❤️ for the people of the internet by <a href="http://visual.ng" className="underline font-bold">VisualHQ</a></p>
+          <p>&copy; 2024 Juju. Juju is a product of Visual Core 9 Systems. All rights reserved. Made with ❤️ for the people of the internet by <a href="http://visual.ng" className="underline font-bold">VisualHQ</a></p>
         </div>
       </div>
     </footer>

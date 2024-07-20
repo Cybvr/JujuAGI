@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juju</title>
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/src/index.tsx" as="script" type="module">
-    <link rel="preload" href="/node_modules/.vite/deps/react.js?v=328122d4" as="script">
-    <link rel="preload" href="/node_modules/.vite/deps/react-dom_client.js?v=da015d6c" as="script">
-    <link rel="preload" href="/node_modules/.vite/deps/react-router-dom.js?v=6bb32634" as="script">
+    <!-- Remove or update preload for react-router-dom -->
+    <!-- <link rel="modulepreload" href="/node_modules/.vite/deps/react-router-dom.js?v=6bb32634"> -->
+    
+    <!-- Keep other preloads if they're being used immediately -->
+    <link rel="modulepreload" href="/node_modules/.vite/deps/react.js?v=328122d4">
+    <link rel="modulepreload" href="/node_modules/.vite/deps/react-dom_client.js?v=da015d6c">
     
     <!-- Favicon and app icons -->
     <link rel="icon" type="image/svg+xml" href="/src/assets/logos/favicon.svg" />
