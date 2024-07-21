@@ -181,7 +181,7 @@ const AllToolsPage: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto px-12 py-8 pb-8 pt-8">
+    <div className="container mx-auto px-12 py-24">
       <h1 className="text-3xl font-bold mb-8 text-center">All Tools</h1>
       <div className="flex flex-wrap justify-center mb-8">
         {categories.map(category => (

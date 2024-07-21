@@ -11,6 +11,8 @@ import DataDeletionPage from './pages/DataDeletionPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollToTop from './components/ScrollToTop';
 import CookiePopup from './components/CookiePopup';
+import BlogList from './components/blog/BlogList';
+import BlogPost from './components/blog/BlogPost';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AllToolsPage = lazy(() => import('./pages/AllToolsPage'));
@@ -144,6 +146,8 @@ function App() {
                 <Route path="/data-deletion" element={<DataDeletionPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/category/:category" element={<CategoryPage />} />
+                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route
                   path="/dashboard"
                   element={

@@ -26,6 +26,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
     { name: 'Writing', path: '/all-tools?category=writing' },
     { name: 'Convert', path: '/all-tools?category=convert' },
     { name: 'Pricing', path: '/pricing' },
+    { name: 'Blog', path: '/blog' },
   ];
 
   useEffect(() => {
@@ -133,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
               <>
                 <Link
                   to="/login"
-                  className="bg-white dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-600 border border-zinc-300 dark:border-zinc-600"
+                  className="bg-white dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-600 "
                 >
                   Sign In
                 </Link>
@@ -141,7 +142,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
                   to="/signup"
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                 >
-                  Sign Up
+                  Get Started
                 </Link>
               </>
             )}

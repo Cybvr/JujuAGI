@@ -5,33 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juju</title>
     
-    <!-- Remove or update preload for react-router-dom -->
-    <!-- <link rel="modulepreload" href="/node_modules/.vite/deps/react-router-dom.js?v=6bb32634"> -->
-    
-    <!-- Keep other preloads if they're being used immediately -->
     <link rel="modulepreload" href="/node_modules/.vite/deps/react.js?v=328122d4">
     <link rel="modulepreload" href="/node_modules/.vite/deps/react-dom_client.js?v=da015d6c">
     
-    <!-- Favicon and app icons -->
     <link rel="icon" type="image/svg+xml" href="/src/assets/logos/favicon.svg" />
     <link rel="apple-touch-icon" href="/icon-192x192.png">
     
-    <!-- Web app manifest -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#164fff">
     
-    <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     
-    <!-- Load Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Inline critical CSS -->
     <style>
       body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
       #root { min-height: 100vh; }
+      @media (max-width: 768px) {
+        .chatbase-bubble, .chatbase-embed {
+          display: none !important;
+        }
+      }
     </style>
+    <script>
+    window.embeddedChatbotConfig = {
+    chatbotId: "TB6IwCsYnWV0nUh-XJxPF",
+    domain: "www.chatbase.co"
+    }
+    </script>
+    <script
+    src="https://www.chatbase.co/embed.min.js"
+    chatbotId="TB6IwCsYnWV0nUh-XJxPF"
+    domain="www.chatbase.co"
+    defer>
+    </script>
   </head>
   <body>
     <div id="root"></div>

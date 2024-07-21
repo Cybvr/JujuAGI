@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
               <ul>
                 <li><Link to="/privacy" className="hover:text-blue-400">Privacy Policy</Link></li>
                 <li><Link to="/terms" className="hover:text-blue-400">Terms & Agreement</Link></li>
-                <li><Link to="/data-deletion" className="text-blue-500 hover:text-blue-600">Data Protection</Link></li>
+                <li><Link to="/data-deletion" className="hover:text-blue-600">Data Protection</Link></li>
                 <li><Link to="/cookies" className="hover:text-blue-400">Cookies</Link></li>
               </ul>
               
