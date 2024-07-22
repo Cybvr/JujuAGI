@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
-import FlutterwavePayment from '../payments/FlutterwavePayment';
 
 interface Feature {
   name: string;
@@ -11,20 +10,18 @@ interface Feature {
 interface Plan {
   name: string;
   price: string;
+  frequency: string;
   features: Feature[];
   ctaText: string;
   ctaLink: string;
 }
 
 const PricingPlans: React.FC = () => {
-  const [customerEmail, setCustomerEmail] = useState('');
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
-
   const plans: Plan[] = [
     {
       name: 'Free',
       price: '$0',
+      frequency: '',
       features: [
         { name: 'Access to basic tools', included: true },
         { name: 'Limited file size (up to 10MB)', included: true },
@@ -40,8 +37,9 @@ const PricingPlans: React.FC = () => {
       ctaLink: '/signup',
     },
     {
-      name: 'Lifetime Access',
-      price: '$20',
+      name: 'Pro',
+      price: '$10',
+      frequency: '/month',
       features: [
         { name: 'Access to all tools (basic & premium)', included: true },
         { name: 'Increased file size limit (up to 50MB)', included: true },
@@ -55,14 +53,31 @@ const PricingPlans: React.FC = () => {
     },
   ];
 
-  const handlePaymentSuccess = (response: any) => {
-    console.log('Payment successful', response);
-    // Implement your logic for successful payment
-  };
-
-  const handlePaymentFailure = (error: any) => {
-    console.error('Payment failed', error);
-    // Implement your logic for failed payment
+  const handlePayment = () => {
+    // @ts-ignore
+    FlutterwaveCheckout({
+      public_key: "YOUR_FLUTTERWAVE_PUBLIC_KEY",
+      tx_ref: Date.now().toString(),
+      amount: 10,
+      currency: "USD",
+      payment_options: "card,mobilemoney,ussd",
+      customer: {
+        email: "user@example.com",
+        name: "John Doe",
+      },
+      customizations: {
+        title: "Juju Pro Subscription",
+        description: "Monthly subscription for Juju Pro",
+        logo: "https://yourlogo.com/logo.png",
+      },
+      callback: function(response: any) {
+        console.log("Payment successful", response);
+        // Handle subscription activation here
+      },
+      onclose: function() {
+        console.log("Payment modal closed");
+      }
+    });
   };
 
   return (
@@ -71,11 +86,16 @@ const PricingPlans: React.FC = () => {
         <div
           key={plan.name}
           className={`bg-white dark:bg-zinc-800 p-8 rounded-lg shadow-md w-full md:w-1/2 flex flex-col ${
-            plan.name === 'Lifetime Access' ? 'border-2 border-blue-500' : ''
+            plan.name === 'Pro' ? 'border-2 border-blue-500' : ''
           }`}
         >
           <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
-          <p className="text-4xl font-bold text-blue-600 mb-4">{plan.price}</p>
+          <p className="text-4xl font-bold text-blue-600 mb-4">
+            {plan.price}
+            <span className="text-sm font-normal text-zinc-600 dark:text-zinc-400">
+              {plan.frequency}
+            </span>
+          </p>
           <ul className="mb-6 space-y-2 text-zinc-600 dark:text-zinc-300 flex-grow">
             {plan.features.map((feature, index) => (
               <li key={index} className="flex items-center">
@@ -88,42 +108,17 @@ const PricingPlans: React.FC = () => {
               </li>
             ))}
           </ul>
-          {plan.name === 'Lifetime Access' ? (
-            <>
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={customerEmail}
-                onChange={(e) => setCustomerEmail(e.target.value)}
-                className="mb-2 p-2 border rounded"
-              />
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={customerName}
-                onChange={(e) => setCustomerName(e.target.value)}
-                className="mb-2 p-2 border rounded"
-              />
-              <input
-                type="tel"
-                placeholder="Your Phone"
-                value={customerPhone}
-                onChange={(e) => setCustomerPhone(e.target.value)}
-                className="mb-2 p-2 border rounded"
-              />
-              <FlutterwavePayment
-                amount={20}
-                customerEmail={customerEmail}
-                customerName={customerName}
-                customerPhone={customerPhone}
-                onSuccess={handlePaymentSuccess}
-                onFailure={handlePaymentFailure}
-              />
-            </>
+          {plan.name === 'Pro' ? (
+            <button
+              onClick={handlePayment}
+              className="px-6 py-2 rounded-md font-semibold transition duration-300 text-center bg-blue-600 text-white hover:bg-blue-700"
+            >
+              {plan.ctaText}
+            </button>
           ) : (
             <Link
               to={plan.ctaLink}
-              className="bg-zinc-200 text-zinc-800 px-6 py-2 rounded-md font-semibold hover:bg-zinc-300 transition duration-300 text-center"
+              className="px-6 py-2 rounded-md font-semibold transition duration-300 text-center bg-zinc-200 text-zinc-800 hover:bg-zinc-300"
             >
               {plan.ctaText}
             </Link>

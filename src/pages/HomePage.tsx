@@ -6,7 +6,6 @@ import WhyChooseJuju from '../components/WhyChooseJuju';
 import CallToAction from '../components/CallToAction';
 import InstallGuide from '../components/InstallGuide';
 import PricingPlans from '../components/PricingPlans';
-import TestimonialSection from '../components/TestimonialSection';
 import FAQSection from '../components/FAQSection';
 import WhatsNewSection from '../components/WhatsNewSection';
 
@@ -59,7 +58,6 @@ const HomePage: React.FC = () => {
           <PricingPlans />
         </div>
       </section>
-      <TestimonialSection />
       <FAQSection />
       <CallToAction />
     </div>

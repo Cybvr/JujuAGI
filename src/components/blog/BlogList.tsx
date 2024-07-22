@@ -1,57 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import sanityClient from '../../utils/sanityClient';
+import { supabase } from '../../utils/supabase';
 
 interface Post {
-  _id: string;
+  id: number;
   title: string;
-  slug: {
-    current: string;
-  };
+  slug: string;
+  featured_image: string;
+  excerpt: string;
+  category: string;
 }
 
 const BlogList: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    sanityClient
-      .fetch(
-        `*[_type == "post"] {
-          _id,
-          title,
-          slug,
-        }`
-      )
-      .then((data) => {
-        setPosts(data);
-        setLoading(false);
-      })
-      .catch(console.error);
+    fetchPosts();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  async function fetchPosts() {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .neq('category', 'Changelog')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.log('error', error);
+      setError('Failed to fetch posts');
+    } else {
+      setPosts(data as Post[]);
+    }
+    setLoading(false);
+  }
+
+  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (error) return <div className="text-center py-8 text-red-600">{error}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Blog Posts</h1>
-      {posts.length === 0 ? (
-        <p>No posts found.</p>
-      ) : (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div key={post._id} className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-              <Link
-                to={`/blog/${post.slug.current}`}
-                className="text-blue-500 hover:text-blue-600"
-              >
-                Read more
-              </Link>
+    <div className="container mx-auto px-4 py-12">
+      <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-8 rounded-lg mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Blog</h1>
+        <p className="text-xl">Discover our latest thoughts and insights</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post, index) => (
+          <Link key={post.id} to={`/blog/${post.slug}`} className={`block ${index === 0 ? 'md:col-span-2 lg:col-span-3' : ''}`}>
+            <div className={`bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 h-full ${index === 0 ? 'md:flex' : ''}`}>
+              <div className={`${index === 0 ? 'md:w-1/2' : 'w-full'}`}>
+                <img src={post.featured_image} alt={post.title} className="w-full h-64 object-cover" />
+              </div>
+              <div className={`p-6 flex flex-col justify-between ${index === 0 ? 'md:w-1/2' : 'w-full'}`}>
+                <div>
+                  <h2 className={`font-semibold mb-3 ${index === 0 ? 'text-3xl' : 'text-xl'}`}>{post.title}</h2>
+                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                </div>
+                <span className="text-blue-600 font-semibold mt-2 inline-block">Read more →</span>
+              </div>
             </div>
-          ))}
-        </div>
-      )}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

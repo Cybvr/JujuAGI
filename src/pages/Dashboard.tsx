@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Settings, CreditCard, HelpCircle, LogOut, Menu, X } from 'lucide-react';
+import { Home, Settings, CreditCard, HelpCircle, LogOut, Menu, X, Edit } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import DashboardContent from '../components/settings/DashboardContent';
 import SettingsComponent from '../components/settings/SettingsComponent';
 import Subscription from '../components/settings/Subscription';
 import HelpSupport from '../components/settings/HelpSupport';
+import Scribe from '../components/settings/Scribe';
 
 enum MenuItemName {
   Dashboard = 'Dashboard',
+  Scribe = 'Scribe',
   Settings = 'Settings',
   Subscription = 'Subscription',
   HelpAndSupport = 'Help and Support'
@@ -39,6 +41,7 @@ const Dashboard: React.FC = () => {
 
   const menuItems: MenuItem[] = [
     { name: MenuItemName.Dashboard, icon: Home, component: DashboardContent },
+    { name: MenuItemName.Scribe, icon: Edit, component: Scribe },
     { name: MenuItemName.Settings, icon: Settings, component: SettingsComponent },
     { name: MenuItemName.Subscription, icon: CreditCard, component: Subscription },
     { name: MenuItemName.HelpAndSupport, icon: HelpCircle, component: HelpSupport },

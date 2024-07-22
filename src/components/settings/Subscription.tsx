@@ -19,8 +19,8 @@ const planDetails: Record<PlanType, PlanDetails> = {
     features: ['Basic access to tools', '5 conversions per day', 'Ad-supported']
   },
   [PlanType.Premium]: {
-    title: "Premium Plan",
-    price: "$9.99/month",
+    title: "Pro Plan",
+    price: "$10/month",
     features: ['Unlimited access to all tools', 'Unlimited conversions', 'Ad-free experience', 'Priority support']
   }
 };
@@ -61,7 +61,7 @@ const Subscription: React.FC = () => {
         <h3 className="text-xl font-semibold mb-4">Current Plan: {planDetails[currentPlan].title}</h3>
         <p className="text-gray-600 mb-4">Your plan renews on: {currentPlan === PlanType.Free ? 'N/A' : 'June 1, 2024'}</p>
         <button className={`px-4 py-2 rounded ${currentPlan === PlanType.Free ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600'} text-white`}>
-          {currentPlan === PlanType.Free ? 'Upgrade to Premium' : 'Cancel Subscription'}
+          {currentPlan === PlanType.Free ? 'Upgrade to Pro' : 'Cancel Subscription'}
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

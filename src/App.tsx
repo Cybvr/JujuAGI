@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,25 +11,12 @@ import DataDeletionPage from './pages/DataDeletionPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollToTop from './components/ScrollToTop';
 import CookiePopup from './components/CookiePopup';
-import BlogList from './components/blog/BlogList';
-import BlogPost from './components/blog/BlogPost';
+import ChangelogPage from './pages/ChangelogPage';
+
+// Lazy loaded components
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AllToolsPage = lazy(() => import('./pages/AllToolsPage'));
-const PDFtoJPG = lazy(() => import('./components/tools/pdf/PDFtoJPG'));
-const JPGtoPDF = lazy(() => import('./components/tools/pdf/JPGtoPDF'));
-const MergePDF = lazy(() => import('./components/tools/pdf/MergePDF'));
-const SplitPDF = lazy(() => import('./components/tools/pdf/SplitPDF'));
-// Convert tools
-const ExcelToPDF = lazy(() => import('./components/tools/convert/ExcelToPDF'));
-const CSVToExcel = lazy(() => import('./components/tools/convert/CSVToExcel'));
-const XMLToJSON = lazy(() => import('./components/tools/convert/XMLToJSON'));
-const XMLToCSV = lazy(() => import('./components/tools/convert/XMLToCSV'));
-
-const RemoveBackground = lazy(() => import('./components/tools/images/RemoveBackground'));
-const ImageResizer = lazy(() => import('./components/tools/images/ImageResizer'));
-const ImageConverter = lazy(() => import('./components/tools/images/ImageConverter'));
-const ImageCompressor = lazy(() => import('./components/tools/images/ImageCompressor'));
 const ToolTemplate = lazy(() => import('./pages/ToolTemplate'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
@@ -41,17 +28,46 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const ResumeWriter = lazy(() => import('./components/tools/writing/ResumeWriter'));
-const TextCaseConverter = lazy(() => import('./components/tools/writing/TextCaseConverter'));
+const BlogList = lazy(() => import('./components/blog/BlogList'));
+const BlogPost = lazy(() => import('./components/blog/BlogPost'));
 
+// PDF tools
+const PDFtoJPG = lazy(() => import('./components/tools/pdf/PDFtoJPG'));
+const JPGtoPDF = lazy(() => import('./components/tools/pdf/JPGtoPDF'));
+const MergePDF = lazy(() => import('./components/tools/pdf/MergePDF'));
+const SplitPDF = lazy(() => import('./components/tools/pdf/SplitPDF'));
+
+// Convert tools
+const ExcelToPDF = lazy(() => import('./components/tools/convert/ExcelToPDF'));
+const CSVToExcel = lazy(() => import('./components/tools/convert/CSVToExcel'));
+const XMLToJSON = lazy(() => import('./components/tools/convert/XMLToJSON'));
+const XMLToCSV = lazy(() => import('./components/tools/convert/XMLToCSV'));
+
+// Image tools
+const RemoveBackground = lazy(() => import('./components/tools/images/RemoveBackground'));
+const ImageResizer = lazy(() => import('./components/tools/images/ImageResizer'));
+const ImageConverter = lazy(() => import('./components/tools/images/ImageConverter'));
+const ImageCompressor = lazy(() => import('./components/tools/images/ImageCompressor'));
+
+// Writing tools
+const ResumeWriter = lazy(() => import('./components/tools/writing/ResumeWriter'));
 const EssayWriter = lazy(() => import('./components/tools/writing/EssayWriter'));
 const GrammarChecker = lazy(() => import('./components/tools/writing/GrammarChecker'));
+const TextCaseConverter = lazy(() => import('./components/tools/writing/TextCaseConverter'));
 const PlagiarismDetector = lazy(() => import('./components/tools/writing/PlagiarismDetector'));
 const WordCount = lazy(() => import('./components/tools/writing/WordCountTool'));
 const CharacterCount = lazy(() => import('./components/tools/writing/CharacterCountTool'));
 const LoremIpsum = lazy(() => import('./components/tools/writing/LoremIpsumGenerator'));
 
-function App() {
+// New Scribe component
+const Scribe = lazy(() => import('./components/settings/Scribe'));
+
+interface Tool {
+  name: string;
+  path: string;
+}
+
+const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
@@ -71,11 +87,11 @@ function App() {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
+  const toggleDarkMode = (): void => {
     setDarkMode((prevMode: boolean) => !prevMode);
   };
 
-  const tools = [
+  const tools: Tool[] = [
     { name: 'PDF to JPG', path: '/tool/pdf-to-jpg' },
     { name: 'JPG to PDF', path: '/tool/jpg-to-pdf' },
     { name: 'Merge PDF', path: '/tool/merge-pdf' },
@@ -131,7 +147,6 @@ function App() {
                 <Route path="/tool/csv-to-excel" element={<CSVToExcel />} />
                 <Route path="/tool/xml-to-json" element={<XMLToJSON />} />
                 <Route path="/tool/xml-to-csv" element={<XMLToCSV />} />
-                <Route path="*" element={<AllToolsPage />} />
                 <Route path="/tool/:toolId" element={<ToolTemplate />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
@@ -146,8 +161,10 @@ function App() {
                 <Route path="/data-deletion" element={<DataDeletionPage />} />
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/category/:category" element={<CategoryPage />} />
+                <Route path="/changelog" element={<ChangelogPage />} />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/tool/scribe" element={<Scribe />} />
                 <Route
                   path="/dashboard"
                   element={
@@ -156,6 +173,7 @@ function App() {
                     </PrivateRoute>
                   }
                 />
+                <Route path="*" element={<AllToolsPage />} />
               </Routes>
             </Suspense>
           </main>
@@ -167,6 +185,6 @@ function App() {
       </AuthProvider>
     </ErrorBoundary>
   );
-}
+};
 
 export default App;

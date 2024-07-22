@@ -37,8 +37,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^6.21.1",
     "@supabase/supabase-js": "^2.44.4",
     "@tailwindcss/typography": "^0.5.13",
     "@types/react-router-dom": "^5.3.3",
