@@ -26,7 +26,7 @@ const LoremIpsumGeneratorTool: React.FC = () => {
       </div>
       <button
         onClick={generateLoremIpsum}
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
       >
         Generate Lorem Ipsum
       </button>

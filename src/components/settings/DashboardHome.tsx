@@ -42,7 +42,7 @@ const DashboardCard: React.FC<{ title: string; value: string; icon: React.ReactN
   <div className="bg-white p-6 rounded-lg shadow-md">
     <div className="flex items-center justify-between mb-4">
       <h3 className="text-lg font-semibold">{title}</h3>
-      <span className="text-blue-500">{icon}</span>
+      <span className="text-indigo-500">{icon}</span>
     </div>
     <p className="text-3xl font-bold">{value}</p>
   </div>

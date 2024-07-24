@@ -3,18 +3,18 @@ const CookiePolicy = () => {
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">Cookie Policy</h1>
-        <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
-          <p className="text-gray-700 mb-4">
+        <div className="max-w-3xl mx-auto bg-zinc-50 p-8 rounded-lg shadow-md">
+          <p className="text-zinc-700 mb-4">
             This Cookie Policy explains how Juju, operated by Visual Core 9 Systems (operating as VisualHQ) ("we", "us", "our"), uses cookies and similar technologies on our website and services. This policy is compliant with the General Data Protection Regulation (GDPR).
           </p>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">1. What are Cookies?</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             Cookies are small text files that are placed on your device when you visit a website. They are widely used to make websites work more efficiently and provide information to the owners of the site.
           </p>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">2. Types of Cookies We Use</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             We use the following types of cookies:
           </p>
           <ul className="list-disc pl-6 mb-4">
@@ -25,7 +25,7 @@ const CookiePolicy = () => {
           </ul>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">3. Specific Cookies We Use</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             Here are the specific cookies we use on Juju:
           </p>
           <table className="w-full text-left border-collapse mb-4">
@@ -66,7 +66,7 @@ const CookiePolicy = () => {
           </table>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">4. Third-Party Services</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             We use the following third-party services that may place cookies on your device:
           </p>
           <ul className="list-disc pl-6 mb-4">
@@ -83,41 +83,41 @@ const CookiePolicy = () => {
               <strong>Anthropic Claude:</strong> We utilize Anthropic's Claude AI for certain features on our website. While Claude itself doesn't set cookies, our integration may use cookies to enhance your experience with AI-powered features.
             </li>
           </ul>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             You can learn more about how these third-party services use cookies and how to opt-out by visiting their respective privacy policies:
           </p>
           <ul className="list-disc pl-6 mb-4">
-            <li><a href="https://policies.google.com/privacy" className="text-blue-600 hover:underline">Google Privacy Policy</a></li>
-            <li><a href="https://firebase.google.com/support/privacy" className="text-blue-600 hover:underline">Firebase Privacy Policy</a></li>
-            <li><a href="https://www.anthropic.com/legal/privacy" className="text-blue-600 hover:underline">Anthropic Privacy Policy</a></li>
+            <li><a href="https://policies.google.com/privacy" className="text-indigo-600 hover:underline">Google Privacy Policy</a></li>
+            <li><a href="https://firebase.google.com/support/privacy" className="text-indigo-600 hover:underline">Firebase Privacy Policy</a></li>
+            <li><a href="https://www.anthropic.com/legal/privacy" className="text-indigo-600 hover:underline">Anthropic Privacy Policy</a></li>
           </ul>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">5. Your Consent</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             When you first visit our website, we will ask for your consent to use cookies, except for essential cookies which are required for the operation of our website. You can choose to accept or decline cookies. You can also change your cookie settings at any time by clicking on the "Cookie Settings" link in the footer of our website.
           </p>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">6. Managing Cookies</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             Most web browsers allow some control of most cookies through the browser settings. To find out more about cookies, including how to see what cookies have been set and how to manage and delete them, visit www.aboutcookies.org or www.allaboutcookies.org.
           </p>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">7. Changes to This Cookie Policy</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page and updating the "Last updated" date.
           </p>
 
           <h2 className="text-2xl font-semibold mt-6 mb-3">8. Contact Us</h2>
-          <p className="text-gray-700 mb-4">
+          <p className="text-zinc-700 mb-4">
             If you have any questions about this Cookie Policy, please contact us at:
           </p>
-          <p className="text-gray-700">
+          <p className="text-zinc-700">
             VisualHQ (operated by Visual Core 9 Systems)<br />
             5 Ado Ibrahim Street, 101212, Sabo, Yaba, Lagos, Nigeria<br />
             Email: art@visual.ng
           </p>
 
-          <p className="text-gray-700 mt-6">
+          <p className="text-zinc-700 mt-6">
             Last updated: July 19, 2024
           </p>
         </div>

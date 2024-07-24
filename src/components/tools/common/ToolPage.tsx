@@ -1,6 +1,6 @@
 import React from 'react';
+import Breadcrumbs from '../../Breadcrumbs';
 import OtherToolsSection from './OtherToolsSection';
-
 
 interface ToolPageProps {
   title: string;
@@ -10,30 +10,33 @@ interface ToolPageProps {
 }
 
 const ToolPage: React.FC<ToolPageProps> = ({ title, toolComponent, instructions, category }) => {
+  const breadcrumbItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Tools', path: '/all-tools' },
+    { label: category.charAt(0).toUpperCase() + category.slice(1), path: `/category/${category}` },
+    { label: title, path: `/tool/${title.toLowerCase().replace(/\s+/g, '-')}` },
+  ];
+  const currentToolPath = `/tool/${title.toLowerCase().replace(/\s+/g, '-')}`;
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">{title}</h1>
-
-      {/* Main tool component */}
-      {toolComponent}
-
-      {/* How to section */}
-      <div className="mt-16 mb-12">
-        <h2 className="text-3xl font-bold mb-8">How to {title}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gray-100 p-6 rounded-lg">
+    <div className="bg-zinc-50 dark:bg-zinc-800  min-h-screen py-8 pb-40">
+      <div className="max-w-[1000px] mx-auto px-4">
+        <Breadcrumbs items={breadcrumbItems} />
+        
+        {/* Main tool component */}
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg p-8 shadow-sm">
+          <h1 className="text-2xl font-bold text-left mb-8 tex-zinc-400">{title}</h1>
+          {toolComponent}
+        </div>
+        {/* How to section */}
+        <div className="mt-16 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700  p-6 rounded-lg shadow-sm">
             {instructions}
           </div>
-          <div className="bg-gray-100 p-6 rounded-lg flex items-center justify-center">
-            <div className="text-center text-gray-400">
-              [Placeholder for step-by-step image]
-            </div>
-          </div>
         </div>
+        {/* Other Tools section */}
+        <OtherToolsSection category={category} currentToolPath={currentToolPath} />
       </div>
-
-      {/* Other Tools section */}
-      <OtherToolsSection category={category} />
     </div>
   );
 };

@@ -46,15 +46,15 @@ const EssayWriterTool: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-50 p-6 rounded-lg shadow-lg">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-zinc-50 p-6 rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white p-4 rounded-md shadow">
-          <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="topic" className="block text-sm font-medium text-zinc-700 mb-1">
             Essay Topic
           </label>
           <div className="relative rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <BookOpen className="h-5 w-5 text-gray-400" />
+              <BookOpen className="h-5 w-5 text-zinc-400" />
             </div>
             <input
               type="text"
@@ -63,27 +63,27 @@ const EssayWriterTool: React.FC = () => {
               value={essayData.topic}
               onChange={handleInputChange}
               placeholder="e.g. The Impact of Climate Change"
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-zinc-300 rounded-md"
               required
             />
           </div>
-          <p className="mt-1 text-sm text-gray-500">Enter the main topic or title of your essay.</p>
+          <p className="mt-1 text-sm text-zinc-500">Enter the main topic or title of your essay.</p>
         </div>
 
         <div className="bg-white p-4 rounded-md shadow">
-          <label htmlFor="wordCount" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="wordCount" className="block text-sm font-medium text-zinc-700 mb-1">
             Word Count
           </label>
           <div className="relative rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <AlignLeft className="h-5 w-5 text-gray-400" />
+              <AlignLeft className="h-5 w-5 text-zinc-400" />
             </div>
             <select
               name="wordCount"
               id="wordCount"
               value={essayData.wordCount}
               onChange={handleInputChange}
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-zinc-300 rounded-md"
               required
             >
               <option value="">Select word count</option>
@@ -94,7 +94,7 @@ const EssayWriterTool: React.FC = () => {
               <option value="2000">2000 words</option>
             </select>
           </div>
-          <p className="mt-1 text-sm text-gray-500">Select the desired length of your essay.</p>
+          <p className="mt-1 text-sm text-zinc-500">Select the desired length of your essay.</p>
         </div>
 
         <button
@@ -114,7 +114,7 @@ const EssayWriterTool: React.FC = () => {
       </form>
 
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Generated Essay</h2>
+        <h2 className="text-2xl font-bold mb-4 text-zinc-800">Generated Essay</h2>
         {error && <p className="text-red-500 mb-4 p-3 bg-red-100 rounded">{error}</p>}
         {isLoading && (
           <div className="flex items-center justify-center h-64">
@@ -133,9 +133,9 @@ const EssayWriterTool: React.FC = () => {
 };
 
 const EssayWriterInstructions: React.FC = () => (
-  <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-    <h3 className="text-lg font-semibold mb-4 text-blue-800">How to Use:</h3>
-    <ol className="list-decimal list-inside space-y-2 text-blue-700">
+  <div className="bg-indigo-50 p-6 rounded-lg shadow-md">
+    <h3 className="text-lg font-semibold mb-4 text-indigo-800">How to Use:</h3>
+    <ol className="list-decimal list-inside space-y-2 text-indigo-700">
       <li>Enter the main topic or title of your essay in the "Essay Topic" field.</li>
       <li>Select the desired word count for your essay from the dropdown menu.</li>
       <li>Click the "Generate Essay" button to create an AI-generated essay based on your input.</li>

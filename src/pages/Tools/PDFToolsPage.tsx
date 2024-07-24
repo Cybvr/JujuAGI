@@ -43,9 +43,9 @@ const PDFToolsPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pdfTools.map((tool, index) => (
           <Link key={index} to={tool.path} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-            <div className="text-blue-600 mb-4">{tool.icon}</div>
+            <div className="text-indigo-600 mb-4">{tool.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{tool.title}</h3>
-            <p className="text-gray-600">{tool.description}</p>
+            <p className="text-zinc-600">{tool.description}</p>
           </Link>
         ))}
       </div>

@@ -46,7 +46,7 @@ const JPGtoPDFTool: React.FC = () => {
       />
       <button 
         onClick={convertToPDF} 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={files.length === 0}
       >
         Convert JPGs to PDF

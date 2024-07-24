@@ -46,15 +46,15 @@ const ResumeWriterTool: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-50 p-6 rounded-lg shadow-lg">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-zinc-50 p-6 rounded-lg shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-white p-4 rounded-md shadow">
-          <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="jobTitle" className="block text-sm font-medium text-zinc-700 mb-1">
             Desired Job Title
           </label>
           <div className="relative rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Briefcase className="h-5 w-5 text-gray-400" />
+              <Briefcase className="h-5 w-5 text-zinc-400" />
             </div>
             <input
               type="text"
@@ -63,27 +63,27 @@ const ResumeWriterTool: React.FC = () => {
               value={resumeData.jobTitle}
               onChange={handleInputChange}
               placeholder="e.g. Software Engineer"
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-zinc-300 rounded-md"
               required
             />
           </div>
-          <p className="mt-1 text-sm text-gray-500">Enter the job title you're applying for.</p>
+          <p className="mt-1 text-sm text-zinc-500">Enter the job title you're applying for.</p>
         </div>
 
         <div className="bg-white p-4 rounded-md shadow">
-          <label htmlFor="yearsOfExperience" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="yearsOfExperience" className="block text-sm font-medium text-zinc-700 mb-1">
             Years of Experience
           </label>
           <div className="relative rounded-md shadow-sm">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Clock className="h-5 w-5 text-gray-400" />
+              <Clock className="h-5 w-5 text-zinc-400" />
             </div>
             <select
               name="yearsOfExperience"
               id="yearsOfExperience"
               value={resumeData.yearsOfExperience}
               onChange={handleInputChange}
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-zinc-300 rounded-md"
               required
             >
               <option value="">Select years of experience</option>
@@ -94,7 +94,7 @@ const ResumeWriterTool: React.FC = () => {
               <option value="10+">10+ years</option>
             </select>
           </div>
-          <p className="mt-1 text-sm text-gray-500">Select your years of relevant experience.</p>
+          <p className="mt-1 text-sm text-zinc-500">Select your years of relevant experience.</p>
         </div>
 
         <button
@@ -114,7 +114,7 @@ const ResumeWriterTool: React.FC = () => {
       </form>
 
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Generated Resume</h2>
+        <h2 className="text-2xl font-bold mb-4 text-zinc-800">Generated Resume</h2>
         {error && <p className="text-red-500 mb-4 p-3 bg-red-100 rounded">{error}</p>}
         {isLoading && (
           <div className="flex items-center justify-center h-64">
@@ -133,9 +133,9 @@ const ResumeWriterTool: React.FC = () => {
 };
 
 const ResumeWriterInstructions: React.FC = () => (
-  <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-    <h3 className="text-lg font-semibold mb-4 text-blue-800">How to Use:</h3>
-    <ol className="list-decimal list-inside space-y-2 text-blue-700">
+  <div className="bg-indigo-50 p-6 rounded-lg shadow-md">
+    <h3 className="text-lg font-semibold mb-4 text-indigo-800">How to Use:</h3>
+    <ol className="list-decimal list-inside space-y-2 text-indigo-700">
       <li>Enter the job title you're applying for in the "Desired Job Title" field.</li>
       <li>Select your years of relevant experience from the dropdown menu.</li>
       <li>Click the "Generate Resume" button to create an AI-generated resume tailored to your input.</li>

@@ -27,7 +27,7 @@ const MobileNavBar: React.FC = () => {
               <Link
                 to={item.path}
                 className={`flex flex-col items-center ${
-                  isActive ? 'text-blue-500' : 'text-zinc-500 dark:text-zinc-300'
+                  isActive ? 'text-indigo-500' : 'text-zinc-500 dark:text-zinc-300'
                 }`}
               >
                 <FontAwesomeIcon icon={item.icon} size="lg" />

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 import MobileNavBar from './components/MobileNavBar';
 import Loading from './components/Loading';
 import { AuthProvider } from './contexts/AuthContext';
@@ -12,6 +12,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ScrollToTop from './components/ScrollToTop';
 import CookiePopup from './components/CookiePopup';
 import ChangelogPage from './pages/ChangelogPage';
+import AboutPage from './pages/AboutPage';
 
 // Lazy loaded components
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -42,6 +43,8 @@ const ExcelToPDF = lazy(() => import('./components/tools/convert/ExcelToPDF'));
 const CSVToExcel = lazy(() => import('./components/tools/convert/CSVToExcel'));
 const XMLToJSON = lazy(() => import('./components/tools/convert/XMLToJSON'));
 const XMLToCSV = lazy(() => import('./components/tools/convert/XMLToCSV'));
+const QRCodeGenerator = lazy(() => import('./components/tools/convert/QRCodeGenerator'));
+
 
 // Image tools
 const RemoveBackground = lazy(() => import('./components/tools/images/RemoveBackground'));
@@ -118,7 +121,7 @@ const App: React.FC = () => {
     <ErrorBoundary>
       <AuthProvider>
         <ScrollToTop />
-        <div className={`min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white ${darkMode ? 'dark' : ''}`}>
+        <div className={`min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white ${darkMode ? 'dark' : ''}`}>
           {!isLoginPage && !isSignupPage && !isDashboardPage && (
             <Header darkMode={darkMode} setDarkMode={toggleDarkMode} tools={tools} />
           )}
@@ -147,6 +150,7 @@ const App: React.FC = () => {
                 <Route path="/tool/csv-to-excel" element={<CSVToExcel />} />
                 <Route path="/tool/xml-to-json" element={<XMLToJSON />} />
                 <Route path="/tool/xml-to-csv" element={<XMLToCSV />} />
+                <Route path="/tool/qr-code-generator" element={<QRCodeGenerator />} />
                 <Route path="/tool/:toolId" element={<ToolTemplate />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
@@ -165,6 +169,7 @@ const App: React.FC = () => {
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/tool/scribe" element={<Scribe />} />
+                <Route path="/about" element={<AboutPage />} />
                 <Route
                   path="/dashboard"
                   element={

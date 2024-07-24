@@ -5,11 +5,11 @@ const InstallGuide = () => {
   return (
     <section className="bg-sky-50 dark:bg-zinc-800 py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Download Juju</h2>
+        <h2 className="text-4xl font-bold text-center mb-12">Bring Juju Closer</h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="bg-white dark:bg-zinc-900 p-8 rounded-lg">
             <div className="flex items-center mb-4">
-              <Smartphone className="text-blue-600 mr-3" size={24} />
+              <Smartphone className="text-indigo-600 mr-3" size={24} />
               <h3 className="text-2xl font-semibold">On Your Phone</h3>
             </div>
             <ol className="list-decimal list-inside space-y-2 text-zinc-700">
@@ -21,12 +21,12 @@ const InstallGuide = () => {
           </div>
           <div className="bg-white dark:bg-zinc-900 p-8 rounded-lg">
             <div className="flex items-center mb-4">
-              <Monitor className="text-blue-600 mr-3" size={24} />
+              <Monitor className="text-indigo-600 mr-3" size={24} />
               <h3 className="text-2xl font-semibold">On Chrome Desktop</h3>
             </div>
             <ol className="list-decimal list-inside space-y-2 text-zinc-700">
               <li>Visit Juju in Google Chrome</li>
-              <li>Look for the install icon <Plus className="inline text-blue-600" size={18} /> in the address bar</li>
+              <li>Look for the install icon <Plus className="inline text-indigo-600" size={18} /> in the address bar</li>
               <li>Click 'Install'</li>
               <li>Juju will open in its own window</li>
             </ol>

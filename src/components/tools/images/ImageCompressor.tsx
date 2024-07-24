@@ -52,11 +52,11 @@ const ImageCompressorTool: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <div {...getRootProps()} className="bg-blue-500 p-16 rounded-lg text-center text-white cursor-pointer">
+      <div {...getRootProps()} className="bg-indigo-500 p-16 rounded-lg text-center text-white cursor-pointer">
         <input {...getInputProps()} />
         <p>Drag 'n' drop an image here, or click to select an image</p>
       </div>
-      {file && <p className="text-sm text-gray-500">{file.name}</p>}
+      {file && <p className="text-sm text-zinc-500">{file.name}</p>}
       <div>
         <label className="block mb-2">Compression Level:</label>
         <input 
@@ -68,13 +68,13 @@ const ImageCompressorTool: React.FC = () => {
           onChange={(e) => setCompressionLevel(parseFloat(e.target.value))}
           className="w-full"
         />
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-zinc-500 mt-1">
           {compressionLevel < 0.4 ? 'High' : compressionLevel < 0.7 ? 'Medium' : 'Low'} Compression
         </p>
       </div>
       <button 
         onClick={handleCompress} 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={!file}
       >
         Compress Image

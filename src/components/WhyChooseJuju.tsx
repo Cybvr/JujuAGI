@@ -28,7 +28,7 @@ const WhyChooseJuju: React.FC = () => {
       description: "Your data is encrypted and automatically deleted after processing."
     },
     {
-      icon: <Clock className="w-12 h-12 text-blue-500" />,
+      icon: <Clock className="w-12 h-12 text-indigo-500" />,
       title: "Time-Saving",
       description: "Automate repetitive tasks and focus on what matters most."
     },

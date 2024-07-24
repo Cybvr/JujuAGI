@@ -42,7 +42,7 @@ const ImageConverterTool: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      <div {...getRootProps()} className="bg-blue-500 p-16 rounded-lg text-center text-white cursor-pointer">
+      <div {...getRootProps()} className="bg-indigo-500 p-16 rounded-lg text-center text-white cursor-pointer">
         <input {...getInputProps()} />
         <p>Drag 'n' drop an image here, or click to select an image</p>
       </div>
@@ -61,7 +61,7 @@ const ImageConverterTool: React.FC = () => {
       </div>
       <button 
         onClick={handleConvert} 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={!file}
       >
         Convert Image

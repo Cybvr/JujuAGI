@@ -11,10 +11,10 @@ interface SettingItemProps {
 const SettingItem: React.FC<SettingItemProps> = ({ icon, title, description, action }) => (
   <div className="flex items-center justify-between bg-white p-6 rounded-lg shadow-md">
     <div className="flex items-center">
-      <div className="text-blue-500 mr-4">{icon}</div>
+      <div className="text-indigo-500 mr-4">{icon}</div>
       <div>
         <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <p className="text-zinc-600">{description}</p>
       </div>
     </div>
     {action}
@@ -42,7 +42,7 @@ const SettingsComponent: React.FC = () => {
           icon={<User size={24} />}
           title="Account Settings"
           description="Manage your account details and preferences"
-          action={<button className="text-blue-500 hover:underline">Edit</button>}
+          action={<button className="text-indigo-500 hover:underline">Edit</button>}
         />
         <SettingItem 
           icon={<Bell size={24} />}

@@ -86,11 +86,11 @@ const PricingPlans: React.FC = () => {
         <div
           key={plan.name}
           className={`bg-white dark:bg-zinc-800 p-8 rounded-lg shadow-md w-full md:w-1/2 flex flex-col ${
-            plan.name === 'Pro' ? 'border-2 border-blue-500' : ''
+            plan.name === 'Pro' ? 'border-2 border-indigo-500' : ''
           }`}
         >
           <h2 className="text-2xl font-bold mb-2">{plan.name}</h2>
-          <p className="text-4xl font-bold text-blue-600 mb-4">
+          <p className="text-4xl font-bold text-indigo-600 mb-4">
             {plan.price}
             <span className="text-sm font-normal text-zinc-600 dark:text-zinc-400">
               {plan.frequency}
@@ -111,7 +111,7 @@ const PricingPlans: React.FC = () => {
           {plan.name === 'Pro' ? (
             <button
               onClick={handlePayment}
-              className="px-6 py-2 rounded-md font-semibold transition duration-300 text-center bg-blue-600 text-white hover:bg-blue-700"
+              className="px-6 py-2 rounded-md font-semibold transition duration-300 text-center bg-indigo-600 text-white hover:bg-indigo-700"
             >
               {plan.ctaText}
             </button>

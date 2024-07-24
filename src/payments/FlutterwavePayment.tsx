@@ -56,7 +56,7 @@ const FlutterwavePayment: React.FC<FlutterwavePaymentProps> = ({
   return (
     <button
       onClick={handlePayment}
-      className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+      className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300"
     >
       Pay ${amount} for Lifetime Access
     </button>

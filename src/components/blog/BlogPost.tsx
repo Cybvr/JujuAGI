@@ -39,21 +39,21 @@ const BlogPost: React.FC = () => {
 
   if (loading) return (
     <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
     </div>
   );
 
   if (!post) return (
     <div className="container mx-auto px-4 py-8 text-center">
       <h1 className="text-3xl font-bold mb-4">Post not found</h1>
-      <Link to="/blog" className="text-blue-500 hover:underline">Return to blog list</Link>
+      <Link to="/blog" className="text-indigo-500 hover:underline">Return to blog list</Link>
     </div>
   );
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-zinc-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        <Link to="/blog" className="inline-flex items-center text-blue-500 hover:underline mb-8">
+        <Link to="/blog" className="inline-flex items-center text-indigo-500 hover:underline mb-8">
           <ArrowLeft className="mr-2" size={20} />
           Back to blog
         </Link>
@@ -68,7 +68,7 @@ const BlogPost: React.FC = () => {
 
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
 
-        <div className="flex items-center text-gray-600 mb-8">
+        <div className="flex items-center text-zinc-600 mb-8">
           <Calendar className="mr-2" size={20} />
           <span className="mr-4">{new Date(post.created_at).toLocaleDateString()}</span>
           <Clock className="mr-2" size={20} />

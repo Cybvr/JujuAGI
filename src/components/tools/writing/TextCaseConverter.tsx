@@ -40,7 +40,7 @@ const TextCaseConverterTool: React.FC = () => {
       />
       <div className="flex space-x-2">
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-indigo-500 text-white px-4 py-2 rounded"
           onClick={() => convertCase('upper')}
         >
           UPPERCASE

@@ -44,22 +44,22 @@ const UserMenu: React.FC = () => {
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-          <div className="px-4 py-2 text-sm text-gray-700">
+          <div className="px-4 py-2 text-sm text-zinc-700">
             {currentUser?.displayName || 'User'}
             <br />
             {currentUser?.email}
           </div>
           <hr />
-          <Link to="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+          <Link to="/dashboard" className="block px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 flex items-center">
             <User className="mr-2" size={16} /> Dashboard
           </Link>
-          <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+          <Link to="/settings" className="block px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 flex items-center">
             <Settings className="mr-2" size={16} /> Settings
           </Link>
           
           <button
             onClick={handleLogout}
-            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+            className="block w-full text-left px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 flex items-center"
           >
             <LogOut className="mr-2" size={16} /> Logout
           </button>

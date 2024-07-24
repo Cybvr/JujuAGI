@@ -1,17 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Settings, CreditCard, HelpCircle, LogOut, Menu, X, Edit } from 'lucide-react';
+import { Home, Settings, CreditCard, HelpCircle, LogOut, Menu, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import Header from '../components/Header';
+import Header from '../components/common/Header';
 import DashboardContent from '../components/settings/DashboardContent';
 import SettingsComponent from '../components/settings/SettingsComponent';
 import Subscription from '../components/settings/Subscription';
 import HelpSupport from '../components/settings/HelpSupport';
-import Scribe from '../components/settings/Scribe';
 
 enum MenuItemName {
   Dashboard = 'Dashboard',
-  Scribe = 'Scribe',
   Settings = 'Settings',
   Subscription = 'Subscription',
   HelpAndSupport = 'Help and Support'
@@ -41,7 +39,6 @@ const Dashboard: React.FC = () => {
 
   const menuItems: MenuItem[] = [
     { name: MenuItemName.Dashboard, icon: Home, component: DashboardContent },
-    { name: MenuItemName.Scribe, icon: Edit, component: Scribe },
     { name: MenuItemName.Settings, icon: Settings, component: SettingsComponent },
     { name: MenuItemName.Subscription, icon: CreditCard, component: Subscription },
     { name: MenuItemName.HelpAndSupport, icon: HelpCircle, component: HelpSupport },
@@ -73,7 +70,7 @@ const Dashboard: React.FC = () => {
       onClick={() => handleMenuItemClick(item.name)}
       className={`flex items-center w-full px-4 py-2 mt-2 text-left rounded-md ${
         activeMenu === item.name
-          ? 'bg-zinc-200 dark:bg-zinc-700 text-blue-600 dark:text-blue-400'
+          ? 'bg-zinc-200 dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400'
           : 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700'
       }`}
     >
@@ -136,7 +133,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Sidebar for desktop */}
-          <aside className="hidden md:block w-64 bg-gray-50 dark:bg-zinc-800 rounded-lg p-4 mr-8">
+          <aside className="hidden md:block w-64 bg-zinc-50 dark:bg-zinc-800 rounded-lg p-4 mr-8">
             <nav>
               {menuItems.map(renderMenuItem)}
               <button

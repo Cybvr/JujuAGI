@@ -5,19 +5,25 @@ import './styles/App.css';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <Router>
-      <App />
-    </Router>
+  <Router>
+    <App />
+  </Router>
 );
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then((registration) => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      })
-      .catch((error) => {
-        console.error('ServiceWorker registration failed: ', error);
-      });
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister();
+      }
+    }).then(() => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        })
+        .catch((error) => {
+          console.error('ServiceWorker registration failed: ', error);
+        });
+    });
   });
 }

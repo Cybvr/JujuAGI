@@ -58,7 +58,7 @@ const ToolsSection: React.FC = () => {
               to={tool.path}
               className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              <div className="text-blue-500 dark:text-blue-400 mb-4">
+              <div className="text-indigo-500 dark:text-indigo-400 mb-4">
                 {tool.icon}
               </div>
               <h3 className="text-mb font-semibold mb-2 dark:text-white">
@@ -73,7 +73,7 @@ const ToolsSection: React.FC = () => {
         <div className="mt-12 text-center">
           <Link
             to="/all-tools"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
           >
             View All Tools
             <ChevronRight className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />

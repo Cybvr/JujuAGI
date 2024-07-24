@@ -71,15 +71,15 @@ const PDFtoJPGTool: React.FC = () => {
       />
       <button 
         onClick={convertToJPG} 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={!file || isLoading}
       >
         {isLoading ? 'Converting...' : 'Convert PDF to JPG'}
       </button>
       {isLoading && (
         <div className="mt-4">
-          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-            <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+          <div className="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+            <div className="bg-indigo-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
           </div>
           <p className="text-center mt-2">Converting: {progress}%</p>
         </div>

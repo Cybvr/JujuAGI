@@ -33,7 +33,7 @@ const ChangelogPage: React.FC = () => {
         <h1 className="text-3xl font-bold mb-8 ">Changelog</h1>
         {entries.map((entry) => (
           <div key={entry.id} className="mb-24 flex flex-col sm:flex-row">
-            <div className="w-full sm:w-1/4 pr-4 text-gray-600 text-lg mb-2 sm:mb-0">
+            <div className="w-full sm:w-1/4 pr-4 text-zinc-600 text-lg mb-2 sm:mb-0">
               {new Date(entry.created_at).toLocaleDateString()}
             </div>
             <div className="w-full sm:w-3/4">

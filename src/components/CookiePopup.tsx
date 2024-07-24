@@ -76,20 +76,20 @@ const CookiePopup: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-4 md:mb-0 md:mr-4 max-w-2xl">
               <h2 className="text-xl font-semibold mb-2 dark:text-white">We value your privacy</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
+              <p className="text-sm text-zinc-600 dark:text-zinc-300">
                 We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
               </p>
             </div>
             <div className="flex space-x-4">
               <button
                 onClick={() => setShowPreferences(true)}
-                className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-100 rounded-md hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-zinc-700 dark:text-blue-400 dark:hover:bg-zinc-600"
+                className="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-700 dark:text-indigo-400 dark:hover:bg-zinc-600"
               >
                 Manage Preferences
               </button>
               <button
                 onClick={acceptAllCookies}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600"
               >
                 Accept All
               </button>
@@ -104,9 +104,9 @@ const CookiePopup: React.FC = () => {
                   type="checkbox"
                   checked={preferences.necessary}
                   disabled
-                  className="form-checkbox h-5 w-5 text-blue-600"
+                  className="form-checkbox h-5 w-5 text-indigo-600"
                 />
-                <span className="ml-2 text-gray-700 dark:text-gray-300">Necessary (Always Active)</span>
+                <span className="ml-2 text-zinc-700 dark:text-zinc-300">Necessary (Always Active)</span>
               </label>
             </div>
             <div className="mb-4">
@@ -115,9 +115,9 @@ const CookiePopup: React.FC = () => {
                   type="checkbox"
                   checked={preferences.analytics}
                   onChange={(e) => setPreferences({...preferences, analytics: e.target.checked})}
-                  className="form-checkbox h-5 w-5 text-blue-600"
+                  className="form-checkbox h-5 w-5 text-indigo-600"
                 />
-                <span className="ml-2 text-gray-700 dark:text-gray-300">Analytics</span>
+                <span className="ml-2 text-zinc-700 dark:text-zinc-300">Analytics</span>
               </label>
             </div>
             <div className="mb-6">
@@ -126,15 +126,15 @@ const CookiePopup: React.FC = () => {
                   type="checkbox"
                   checked={preferences.marketing}
                   onChange={(e) => setPreferences({...preferences, marketing: e.target.checked})}
-                  className="form-checkbox h-5 w-5 text-blue-600"
+                  className="form-checkbox h-5 w-5 text-indigo-600"
                 />
-                <span className="ml-2 text-gray-700 dark:text-gray-300">Marketing</span>
+                <span className="ml-2 text-zinc-700 dark:text-zinc-300">Marketing</span>
               </label>
             </div>
             <div className="flex justify-end">
               <button
                 onClick={handleSavePreferences}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600"
               >
                 Save Preferences
               </button>

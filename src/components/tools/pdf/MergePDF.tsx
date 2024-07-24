@@ -41,7 +41,7 @@ const MergePDFTool: React.FC = () => {
       />
       <button 
         onClick={mergePDFs} 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={files.length < 2}
       >
         Merge PDFs

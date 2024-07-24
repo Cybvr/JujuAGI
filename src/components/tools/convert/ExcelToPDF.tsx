@@ -21,19 +21,19 @@ const ExcelToPDFTool: React.FC = () => {
     <div className="space-y-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-center justify-center w-full">
-          <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-zinc-300 border-dashed rounded-lg cursor-pointer bg-zinc-50 dark:hover:bg-bray-800 dark:bg-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:hover:border-zinc-500 dark:hover:bg-zinc-600">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <FileSpreadsheet className="w-10 h-10 mb-3 text-gray-400" />
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Excel file (XLSX, XLS)</p>
+              <FileSpreadsheet className="w-10 h-10 mb-3 text-zinc-400" />
+              <p className="mb-2 text-sm text-zinc-500 dark:text-zinc-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">Excel file (XLSX, XLS)</p>
             </div>
             <input type="file" className="hidden" onChange={handleFileChange} accept=".xlsx,.xls" />
           </label>
         </div>
-        {file && <p className="text-sm text-gray-500">{file.name}</p>}
+        {file && <p className="text-sm text-zinc-500">{file.name}</p>}
         <button 
           type="submit" 
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 flex items-center justify-center"
+          className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 flex items-center justify-center"
           disabled={!file}
         >
           <FileText className="mr-2" />

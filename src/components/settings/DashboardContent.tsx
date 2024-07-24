@@ -56,7 +56,7 @@ const DashboardContent: React.FC = () => {
               alt="Profile"
               className="w-20 h-20 rounded-full object-cover"
             />
-            <label htmlFor="profile-picture-upload" className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1 cursor-pointer">
+            <label htmlFor="profile-picture-upload" className="absolute bottom-0 right-0 bg-indigo-500 rounded-full p-1 cursor-pointer">
               <Upload size={16} className="text-white" />
             </label>
             <input
@@ -76,12 +76,12 @@ const DashboardContent: React.FC = () => {
                   onChange={(e) => setName(e.target.value)}
                   className="border rounded px-2 py-1 mr-2 dark:bg-zinc-700 dark:text-white"
                 />
-                <button onClick={handleNameChange} className="text-blue-500">Save</button>
+                <button onClick={handleNameChange} className="text-indigo-500">Save</button>
               </div>
             ) : (
               <div className="flex items-center">
                 <h2 className="text-xl font-semibold mr-2">{currentUser?.displayName}</h2>
-                <button onClick={() => setIsEditingName(true)} className="text-blue-500">
+                <button onClick={() => setIsEditingName(true)} className="text-indigo-500">
                   <Edit size={16} />
                 </button>
               </div>
@@ -94,7 +94,7 @@ const DashboardContent: React.FC = () => {
           <span className="text-zinc-700 dark:text-zinc-300">Dark Mode</span>
           <button
             onClick={handleDarkModeToggle}
-            className={`p-2 rounded-full ${darkMode ? 'bg-blue-500' : 'bg-zinc-300'}`}
+            className={`p-2 rounded-full ${darkMode ? 'bg-indigo-500' : 'bg-zinc-300'}`}
           >
             {darkMode ? <Sun size={20} className="text-white" /> : <Moon size={20} />}
           </button>
