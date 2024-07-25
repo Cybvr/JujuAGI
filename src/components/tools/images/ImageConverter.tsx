@@ -12,7 +12,7 @@ const ImageConverterTool: React.FC = () => {
     setConvertedImage(null);
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({ 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
     accept: { 'image/*': [] },
     multiple: false 
@@ -31,7 +31,6 @@ const ImageConverterTool: React.FC = () => {
 
   const handleConvert = () => {
     if (!file) return;
-
     const img = new Image();
     img.onload = () => {
       const convertedDataUrl = convertImage(img, targetFormat);
@@ -41,44 +40,56 @@ const ImageConverterTool: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div {...getRootProps()} className="bg-indigo-500 p-16 rounded-lg text-center text-white cursor-pointer">
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop an image here, or click to select an image</p>
-      </div>
-      {file && <p className="text-sm text-gray-500">{file.name}</p>}
-      <div>
-        <label className="block mb-2">Convert to:</label>
-        <select 
-          value={targetFormat} 
-          onChange={(e) => setTargetFormat(e.target.value as 'jpg' | 'png' | 'webp')}
-          className="w-full p-2 border rounded"
+    <div className="flex flex-col md:flex-row gap-8">
+      <div className="w-full md:w-1/2 space-y-4">
+        <div
+          {...getRootProps()}
+          className={`p-6 border-2 border-dashed rounded ${isDragActive ? 'border-indigo-500' : 'border-gray-300'} flex justify-center items-center h-64`}
+          style={{ borderWidth: '1px' }}
         >
-          <option value="jpg">JPG</option>
-          <option value="png">PNG</option>
-          <option value="webp">WebP</option>
-        </select>
-      </div>
-      <button 
-        onClick={handleConvert} 
-        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
-        disabled={!file}
-      >
-        Convert Image
-      </button>
-      {convertedImage && (
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Converted Image:</h3>
-          <img src={convertedImage} alt="Converted" className="max-w-full h-auto" />
-          <a 
-            href={convertedImage} 
-            download={`converted_image.${targetFormat}`}
-            className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
-          >
-            Download Converted Image
-          </a>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p className="text-indigo-500">Drop the image here...</p>
+          ) : (
+            <p className="text-gray-500">Drag & drop an image here, or click to select a file</p>
+          )}
         </div>
-      )}
+        {file && <p className="text-sm text-gray-500">{file.name}</p>}
+        <div>
+          <label className="block mb-2">Convert to:</label>
+          <select 
+            value={targetFormat} 
+            onChange={(e) => setTargetFormat(e.target.value as 'jpg' | 'png' | 'webp')}
+            className="w-full p-2 border rounded"
+          >
+            <option value="jpg">JPG</option>
+            <option value="png">PNG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+        <button 
+          onClick={handleConvert} 
+          className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
+          disabled={!file}
+        >
+          Convert Image
+        </button>
+      </div>
+      <div className="w-full md:w-1/2">
+        {convertedImage && (
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Converted Image:</h3>
+            <img src={convertedImage} alt="Converted" className="max-w-full h-auto" />
+            <a 
+              href={convertedImage} 
+              download={`converted_image.${targetFormat}`}
+              className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
+            >
+              Download Converted Image
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

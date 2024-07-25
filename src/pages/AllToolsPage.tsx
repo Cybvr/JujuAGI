@@ -187,8 +187,8 @@ const AllToolsPage: React.FC = () => {
     : tools.filter(tool => tool.category === activeCategory);
 
   return (
-    <div className="container mx-auto px-4 py-24 pb-64">
-      <h1 className="text-4xl font-bold mb-10 text-center text-zinc-900 dark:text-zinc-100">All Tools</h1>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-48 lg:pt-24">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 text-left text-zinc-900 dark:text-zinc-100">All Tools</h1>
       <CategoryLinks categories={categories} activeCategory={activeCategory} />
       <ToolGrid tools={filteredTools} getCategoryColor={getCategoryColor} />
     </div>
@@ -196,18 +196,18 @@ const AllToolsPage: React.FC = () => {
 };
 
 const CategoryLinks: React.FC<{ categories: Category[], activeCategory: string }> = ({ categories, activeCategory }) => (
-  <div className="flex flex-wrap justify-center mb-10">
+  <div className="flex flex-wrap justify-start mb-4 sm:mb-6 -mx-1">
     {categories.map(category => (
       <Link
         key={category.name}
         to={`/all-tools?category=${category.name}`}
-        className={`m-1 px-4 py-2 rounded-full flex items-center transition-colors ${
+        className={`m-1 px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm rounded-sm flex items-center font-semibold transition-colors ${
           activeCategory === category.name
-            ? 'bg-indigo-500 text-white'
-            : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600'
+            ? 'bg-indigo-600 text-white'
+            : 'bg-white text-zinc-400 hover:bg-zinc-300 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600'
         }`}
       >
-        <span className="mr-2">{category.icon}</span>
+        <span className="mr-1 sm:mr-2">{category.icon}</span>
         {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
       </Link>
     ))}
@@ -215,14 +215,14 @@ const CategoryLinks: React.FC<{ categories: Category[], activeCategory: string }
 );
 
 const ToolGrid: React.FC<{ tools: Tool[], getCategoryColor: (category: string) => string }> = ({ tools, getCategoryColor }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     {tools.map((tool, index) => (
-      <Link key={index} to={tool.path} className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-        <div className={`${getCategoryColor(tool.category)} w-12 h-12 rounded-full flex items-center justify-center mb-4`}>
+      <Link key={index} to={tool.path} className="bg-white border border-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 p-8 sm:p-5 rounded-lg hover:shadow-lg transition-shadow">
+        <div className={`${getCategoryColor(tool.category)} w-8 h-8 sm:w-12 sm:h-8 rounded-full flex items-center justify-center mb-3 sm:mb-4`}>
           {tool.icon}
         </div>
-        <h3 className="text-xl font-semibold mb-2 text-zinc-900 dark:text-zinc-100">{tool.title}</h3>
-        <p className="text-zinc-600 dark:text-zinc-400">{tool.description}</p>
+        <h3 className="text-lg sm:text-md font-semibold mb-2 text-zinc-900 dark:text-zinc-100">{tool.title}</h3>
+        <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">{tool.description}</p>
       </Link>
     ))}
   </div>

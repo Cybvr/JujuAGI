@@ -12,7 +12,7 @@ const ImageCompressorTool: React.FC = () => {
     setCompressedImage(null);
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({ 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
     accept: { 'image/*': [] },
     multiple: false 
@@ -41,7 +41,6 @@ const ImageCompressorTool: React.FC = () => {
 
   const handleCompress = async () => {
     if (!file) return;
-
     const img = new Image();
     img.onload = async () => {
       const compressedDataUrl = await compressImage(img, compressionLevel);
@@ -51,47 +50,59 @@ const ImageCompressorTool: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div {...getRootProps()} className="bg-indigo-500 p-16 rounded-lg text-center text-white cursor-pointer">
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop an image here, or click to select an image</p>
-      </div>
-      {file && <p className="text-sm text-zinc-500">{file.name}</p>}
-      <div>
-        <label className="block mb-2">Compression Level:</label>
-        <input 
-          type="range" 
-          min="0.1" 
-          max="1" 
-          step="0.1" 
-          value={compressionLevel}
-          onChange={(e) => setCompressionLevel(parseFloat(e.target.value))}
-          className="w-full"
-        />
-        <p className="text-sm text-zinc-500 mt-1">
-          {compressionLevel < 0.4 ? 'High' : compressionLevel < 0.7 ? 'Medium' : 'Low'} Compression
-        </p>
-      </div>
-      <button 
-        onClick={handleCompress} 
-        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
-        disabled={!file}
-      >
-        Compress Image
-      </button>
-      {compressedImage && (
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Compressed Image:</h3>
-          <img src={compressedImage} alt="Compressed" className="max-w-full h-auto" />
-          <a 
-            href={compressedImage} 
-            download="compressed_image.jpg"
-            className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
-          >
-            Download Compressed Image
-          </a>
+    <div className="flex flex-col md:flex-row gap-8">
+      <div className="w-full md:w-1/2 space-y-4">
+        <div
+          {...getRootProps()}
+          className={`p-6 border-2 border-dashed rounded ${isDragActive ? 'border-indigo-500' : 'border-gray-300'} flex justify-center items-center h-64`}
+          style={{ borderWidth: '1px' }}
+        >
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p className="text-indigo-500">Drop the image here...</p>
+          ) : (
+            <p className="text-gray-500">Drag & drop an image here, or click to select a file</p>
+          )}
         </div>
-      )}
+        {file && <p className="text-sm text-zinc-500">{file.name}</p>}
+        <div>
+          <label className="block mb-2">Compression Level:</label>
+          <input 
+            type="range" 
+            min="0.1" 
+            max="1" 
+            step="0.1" 
+            value={compressionLevel}
+            onChange={(e) => setCompressionLevel(parseFloat(e.target.value))}
+            className="w-full"
+          />
+          <p className="text-sm text-zinc-500 mt-1">
+            {compressionLevel < 0.4 ? 'High' : compressionLevel < 0.7 ? 'Medium' : 'Low'} Compression
+          </p>
+        </div>
+        <button 
+          onClick={handleCompress} 
+          className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
+          disabled={!file}
+        >
+          Compress Image
+        </button>
+      </div>
+      <div className="w-full md:w-1/2">
+        {compressedImage && (
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Compressed Image:</h3>
+            <img src={compressedImage} alt="Compressed" className="max-w-full h-auto" />
+            <a 
+              href={compressedImage} 
+              download="compressed_image.jpg"
+              className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
+            >
+              Download Compressed Image
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

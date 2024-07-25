@@ -15,7 +15,7 @@ const ImageResizerTool: React.FC = () => {
     setResizedImage(null);
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({ 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
     accept: { 'image/*': [] },
     multiple: false 
@@ -66,75 +66,87 @@ const ImageResizerTool: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div {...getRootProps()} className="bg-indigo-500 p-16 rounded-lg text-center text-white cursor-pointer">
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop an image here, or click to select an image</p>
-      </div>
-      {file && <p className="text-sm text-gray-500">{file.name}</p>}
-      <div className="flex space-x-4">
-        <input 
-          type="number" 
-          placeholder="Width" 
-          value={width} 
-          onChange={(e) => setWidth(e.target.value)}
-          className="flex-1 p-2 border rounded"
-        />
-        <input 
-          type="number" 
-          placeholder="Height" 
-          value={height} 
-          onChange={(e) => setHeight(e.target.value)}
-          className="flex-1 p-2 border rounded"
-        />
-      </div>
-      <div>
-        <label className="mr-4">
-          <input 
-            type="radio" 
-            value="pixels" 
-            checked={resizeOption === 'pixels'} 
-            onChange={() => setResizeOption('pixels')}
-          /> Pixels
-        </label>
-        <label>
-          <input 
-            type="radio" 
-            value="percentage" 
-            checked={resizeOption === 'percentage'} 
-            onChange={() => setResizeOption('percentage')}
-          /> Percentage
-        </label>
-      </div>
-      <div>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={maintainAspectRatio} 
-            onChange={(e) => setMaintainAspectRatio(e.target.checked)}
-          /> Maintain aspect ratio
-        </label>
-      </div>
-      <button 
-        onClick={handleResize} 
-        className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
-        disabled={!file || (!width && !height)}
-      >
-        Resize Image
-      </button>
-      {resizedImage && (
-        <div>
-          <h3 className="text-lg font-semibold mb-2">Resized Image:</h3>
-          <img src={resizedImage} alt="Resized" className="max-w-full h-auto" />
-          <a 
-            href={resizedImage} 
-            download="resized_image.jpg" 
-            className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
-          >
-            Download Resized Image
-          </a>
+    <div className="flex flex-col md:flex-row gap-8">
+      <div className="w-full md:w-1/2 space-y-4">
+        <div
+          {...getRootProps()}
+          className={`p-6 border-2 border-dashed rounded ${isDragActive ? 'border-indigo-500' : 'border-gray-300'} flex justify-center items-center h-64`}
+          style={{ borderWidth: '1px' }}
+        >
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p className="text-indigo-500">Drop the image here...</p>
+          ) : (
+            <p className="text-gray-500">Drag & drop an image here, or click to select a file</p>
+          )}
         </div>
-      )}
+        {file && <p className="text-sm text-gray-500">{file.name}</p>}
+        <div className="flex space-x-4">
+          <input 
+            type="number" 
+            placeholder="Width" 
+            value={width} 
+            onChange={(e) => setWidth(e.target.value)}
+            className="flex-1 p-2 border rounded"
+          />
+          <input 
+            type="number" 
+            placeholder="Height" 
+            value={height} 
+            onChange={(e) => setHeight(e.target.value)}
+            className="flex-1 p-2 border rounded"
+          />
+        </div>
+        <div>
+          <label className="mr-4">
+            <input 
+              type="radio" 
+              value="pixels" 
+              checked={resizeOption === 'pixels'} 
+              onChange={() => setResizeOption('pixels')}
+            /> Pixels
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              value="percentage" 
+              checked={resizeOption === 'percentage'} 
+              onChange={() => setResizeOption('percentage')}
+            /> Percentage
+          </label>
+        </div>
+        <div>
+          <label>
+            <input 
+              type="checkbox" 
+              checked={maintainAspectRatio} 
+              onChange={(e) => setMaintainAspectRatio(e.target.checked)}
+            /> Maintain aspect ratio
+          </label>
+        </div>
+        <button 
+          onClick={handleResize} 
+          className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
+          disabled={!file || (!width && !height)}
+        >
+          Resize Image
+        </button>
+      </div>
+      <div className="w-full md:w-1/2">
+        {resizedImage && (
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Resized Image:</h3>
+            <img src={resizedImage} alt="Resized" className="max-w-full h-auto" />
+            <a 
+              href={resizedImage} 
+              download="resized_image.jpg" 
+              className="block mt-4 text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
+            >
+              Download Resized Image
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

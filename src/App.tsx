@@ -13,7 +13,6 @@ import ScrollToTop from './components/ScrollToTop';
 import CookiePopup from './components/CookiePopup';
 import ChangelogPage from './pages/ChangelogPage';
 import AboutPage from './pages/AboutPage';
-
 // Lazy loaded components
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
@@ -170,6 +169,7 @@ const App: React.FC = () => {
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/tool/scribe" element={<Scribe />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/tool/qr-code-generator" element={<QRCodeGenerator />} />
                 <Route
                   path="/dashboard"
                   element={

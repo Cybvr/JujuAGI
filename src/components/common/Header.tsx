@@ -33,9 +33,9 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
       ]
     },
     {
-      name: 'Product',
+      name: 'About',
       children: [
-        { name: 'About', path: '/about', icon: <Info size={16} /> },
+        { name: 'Company', path: '/about', icon: <Info size={16} /> },
         { name: 'Blog', path: '/blog', icon: <Newspaper size={16} /> },
         { name: 'Changelog', path: '/changelog', icon: <List size={16} /> }
       ]
@@ -105,13 +105,13 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
   return (
     <header className="bg-white dark:bg-zinc-800 shadow-sm sticky top-0 z-10 border-b border-zinc-300 dark:border-zinc-700">
       <nav className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-16">
+        <div className="flex justify-between items-center space-x-4">
+          <div className="flex items-center space-x-4 sm:space-x-16">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="Juju Logo" className="w-24 h-8 hidden md:block" />
-              <img src={mobilelogo} alt="Juju Logo" className="w-10 h-10 md:hidden" />
+              <img src={logo} alt="Juju Logo" className="w-24 h-8 hidden sm:block" />
+              <img src={mobilelogo} alt="Juju Logo" className="w-10 h-10 sm:hidden" />
             </Link>
-            <div className="hidden md:flex space-x-6 items-center" ref={dropdownRef}>
+            <div className="hidden sm:flex space-x-4 md:space-x-6 items-center" ref={dropdownRef}>
               {menuItems.map((item) => (
                 <div key={item.name} className="relative group">
                   {item.children ? (
@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="hidden md:block relative">
+            <div className="hidden sm:block relative">
               <form onSubmit={handleSearch} className="flex items-center">
                 <input
                   type="text"
@@ -200,7 +200,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
               </>
             )}
             <button
-              className="md:hidden text-zinc-600 dark:text-zinc-300"
+              className="sm:hidden text-zinc-600 dark:text-zinc-300"
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -208,7 +208,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, setDarkMode, tools }) => {
           </div>
         </div>
         {menuOpen && (
-          <div className="md:hidden mt-4">
+          <div className="mt-4 sm:hidden">
             {menuItems.map((item) => (
               <div key={item.name}>
                 {item.children ? (

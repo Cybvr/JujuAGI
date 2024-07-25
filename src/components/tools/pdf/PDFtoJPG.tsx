@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import * as pdfjs from 'pdfjs-dist';
 import ToolPage from '../common/ToolPage';
 
@@ -12,13 +13,16 @@ const PDFtoJPGTool: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFile(event.target.files[0]);
-      setImages([]);
-      setError(null);
-    }
-  };
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setFile(acceptedFiles[0]);
+    setImages([]);
+    setError(null);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { 'application/pdf': ['.pdf'] },
+  });
 
   const convertToJPG = async () => {
     if (!file) return;
@@ -62,15 +66,21 @@ const PDFtoJPGTool: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <input 
-        type="file" 
-        accept=".pdf" 
-        onChange={handleFileChange} 
-        className="w-full p-2 border rounded"
-      />
-      <button 
-        onClick={convertToJPG} 
+    <div className="space-y-4 p-4">
+      <div
+        {...getRootProps()}
+        className={`p-6 border-2 border-dashed rounded ${isDragActive ? 'border-indigo-500' : 'border-gray-300'} flex justify-center items-center h-96`}
+        style={{ borderWidth: '1px' }}
+      >
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p className="text-indigo-500">Drop the files here...</p>
+        ) : (
+          <p className="text-gray-500">Drag & drop a PDF file here, or click to select a file</p>
+        )}
+      </div>
+      <button
+        onClick={convertToJPG}
         className="w-full bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600"
         disabled={!file || isLoading}
       >
@@ -78,7 +88,7 @@ const PDFtoJPGTool: React.FC = () => {
       </button>
       {isLoading && (
         <div className="mt-4">
-          <div className="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+          <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
             <div className="bg-indigo-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
           </div>
           <p className="text-center mt-2">Converting: {progress}%</p>
@@ -93,8 +103,8 @@ const PDFtoJPGTool: React.FC = () => {
           {images.map((img, index) => (
             <div key={index} className="space-y-2">
               <img src={img} alt={`Page ${index + 1}`} className="max-w-full h-auto" />
-              <a 
-                href={img} 
+              <a
+                href={img}
                 download={`page_${index + 1}.jpg`}
                 className="block text-center bg-green-500 text-white p-2 rounded hover:bg-green-600"
               >
@@ -110,7 +120,7 @@ const PDFtoJPGTool: React.FC = () => {
 
 const PDFtoJPGInstructions: React.FC = () => (
   <ol className="list-decimal list-inside space-y-2">
-    <li>Upload a PDF file using the file input.</li>
+    <li>Upload a PDF file using the file input or drag and drop area.</li>
     <li>Click "Convert PDF to JPG" to process your PDF.</li>
     <li>Wait for the conversion to complete. You'll see a progress bar during conversion.</li>
     <li>Once converted, you can view and download each page as a JPG image.</li>

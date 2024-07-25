@@ -5,6 +5,7 @@ import RemoveBackground from '../components/tools/RemoveBackground';
 import WordToPdf from '../components/tools/WordToPdf';
 import Breadcrumbs from '../components/Breadcrumbs';
 import OtherToolsSection from '../components/tools/common/OtherToolsSection';
+import ToolNavigation from '../components/ToolNavigation';
 
 const toolComponents: { [key: string]: React.FC } = {
   'remove-background': RemoveBackground,
@@ -18,19 +19,23 @@ const ToolTemplate: React.FC = () => {
   if (!tool) return <div>Tool not found</div>;
 
   const ToolComponent = toolComponents[tool.id];
+
   const breadcrumbItems = [
     { label: 'Tools', path: '/all-tools' },
     { label: tool.title, path: `/tool/${tool.id}` },
   ];
 
   return (
-    <div className="bg-zinc-50 min-h-screen py-16">
-      <div className="max-w-[900px] mx-auto px-4">
-        <Breadcrumbs items={breadcrumbItems} />
-        <h1 className="text-3xl font-bold mb-4">{tool.title}</h1>
-        <p className="text-zinc-600 mb-4">{tool.description}</p>
-        <ToolComponent />
-        <OtherToolsSection category={tool.category} currentToolPath={`/tool/${tool.id}`} />
+    <div className="bg-zinc-50 min-h-screen flex">
+      <ToolNavigation />
+      <div className="flex-1 py-16">
+        <div className="max-w-[900px] mx-auto px-4">
+          <Breadcrumbs items={breadcrumbItems} />
+          <h1 className="text-3xl font-bold mb-4">{tool.title}</h1>
+          <p className="text-zinc-600 mb-4">{tool.description}</p>
+          <ToolComponent />
+          <OtherToolsSection category={tool.category} currentToolPath={`/tool/${tool.id}`} />
+        </div>
       </div>
     </div>
   );
